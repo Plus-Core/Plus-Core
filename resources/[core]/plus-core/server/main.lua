@@ -1,3 +1,9 @@
 PlusCore = {}
+PlusCoreConfig = Plus-Config
+PlusCoreShared = Plus-Shared
+PlusCoreClientCallbacks = {}
+PlusCoreServerCallbacks = {}
 
-return PlusCore
+exports('GetCore', function()
+    return PlusCore
+end)
