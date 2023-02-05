@@ -1,6 +1,6 @@
-PlusCoreCommands = {}
-PlusCoreCommands.List = {}
-PlusCoreCommands.IgnoreList = { -- Ignore old perm levels while keeping backwards compatibility
+PlusCore.Commands = {}
+PlusCore.Commands.List = {}
+PlusCore.Commands.IgnoreList = { -- Ignore old perm levels while keeping backwards compatibility
     ['god'] = true, -- We don't need to create an ace because god is allowed all commands
     ['user'] = true -- We don't need to create an ace because builtin.everyone
 }
@@ -15,7 +15,7 @@ end)
 
 -- Register & Refresh Commands
 
-function PlusCoreCommands.Add(name, help, arguments, argsrequired, callback, permission, ...)
+function PlusCore.Commands.Add(name, help, arguments, argsrequired, callback, permission, ...)
     local restricted = true -- Default to restricted for all commands
     if not permission then permission = 'user' end -- some commands don't pass permission level
     if permission == 'user' then restricted = false end -- allow all users to use command
@@ -37,19 +37,19 @@ function PlusCoreCommands.Add(name, help, arguments, argsrequired, callback, per
         extraPerms.n += 1
         permission = extraPerms
         for i = 1, permission.n do
-            if not PlusCoreCommands.IgnoreList[permission[i]] then -- only create aces for extra perm levels
+            if not PlusCore.Commands.IgnoreList[permission[i]] then -- only create aces for extra perm levels
                 ExecuteCommand(('add_ace PlusCore%s command.%s allow'):format(permission[i], name))
             end
         end
         permission.n = nil
     else
         permission = tostring(permission:lower())
-        if not PlusCoreCommands.IgnoreList[permission] then -- only create aces for extra perm levels
+        if not PlusCore.Commands.IgnoreList[permission] then -- only create aces for extra perm levels
             ExecuteCommand(('add_ace PlusCore%s command.%s allow'):format(permission, name))
         end
     end
 
-    PlusCoreCommands.List[name:lower()] = {
+    PlusCore.Commands.List[name:lower()] = {
         name = name:lower(),
         permission = permission,
         help = help,
@@ -59,12 +59,12 @@ function PlusCoreCommands.Add(name, help, arguments, argsrequired, callback, per
     }
 end
 
-function PlusCoreCommands.Refresh(source)
+function PlusCore.Commands.Refresh(source)
     local src = source
     local Player = PlusCore.func.GetPlayer(src)
     local suggestions = {}
     if Player then
-        for command, info in pairs(PlusCoreCommands.List) do
+        for command, info in pairs(PlusCore.Commands.List) do
             local hasPerm = IsPlayerAceAllowed(tostring(src), 'command.'..command)
             if hasPerm then
                 suggestions[#suggestions + 1] = {
@@ -81,7 +81,7 @@ function PlusCoreCommands.Refresh(source)
 end
 
 -- Teleport
-PlusCoreCommands.Add('tp', Lang:t("command.tp.help"), { { name = Lang:t("command.tp.params.x.name"), help = Lang:t("command.tp.params.x.help") }, { name = Lang:t("command.tp.params.y.name"), help = Lang:t("command.tp.params.y.help") }, { name = Lang:t("command.tp.params.z.name"), help = Lang:t("command.tp.params.z.help") } }, false, function(source, args)
+PlusCore.Commands.Add('tp', Lang:t("command.tp.help"), { { name = Lang:t("command.tp.params.x.name"), help = Lang:t("command.tp.params.x.help") }, { name = Lang:t("command.tp.params.y.name"), help = Lang:t("command.tp.params.y.help") }, { name = Lang:t("command.tp.params.z.name"), help = Lang:t("command.tp.params.z.help") } }, false, function(source, args)
     if args[1] and not args[2] and not args[3] then
         if tonumber(args[1]) then
         local target = GetPlayerPed(tonumber(args[1]))
@@ -115,18 +115,18 @@ PlusCoreCommands.Add('tp', Lang:t("command.tp.help"), { { name = Lang:t("command
     end
 end, 'admin')
 
-PlusCoreCommands.Add('tpm', Lang:t("command.tpm.help"), {}, false, function(source)
+PlusCore.Commands.Add('tpm', Lang:t("command.tpm.help"), {}, false, function(source)
     TriggerClientEvent('PlusCore:Command:GoToMarker', source)
 end, 'admin')
 
-PlusCoreCommands.Add('togglepvp', Lang:t("command.togglepvp.help"), {}, false, function()
+PlusCore.Commands.Add('togglepvp', Lang:t("command.togglepvp.help"), {}, false, function()
     PlusConfig.Server.PVP = not PlusConfig.Server.PVP
     TriggerClientEvent('PlusCore:Client:PvpHasToggled', -1, PlusConfig.Server.PVP)
 end, 'admin')
 
 -- Permissions
 
-PlusCoreCommands.Add('addpermission', Lang:t("command.addpermission.help"), { { name = Lang:t("command.addpermission.params.id.name"), help = Lang:t("command.addpermission.params.id.help") }, { name = Lang:t("command.addpermission.params.permission.name"), help = Lang:t("command.addpermission.params.permission.help") } }, true, function(source, args)
+PlusCore.Commands.Add('addpermission', Lang:t("command.addpermission.help"), { { name = Lang:t("command.addpermission.params.id.name"), help = Lang:t("command.addpermission.params.id.help") }, { name = Lang:t("command.addpermission.params.permission.name"), help = Lang:t("command.addpermission.params.permission.help") } }, true, function(source, args)
     local Player = PlusCore.func.GetPlayer(tonumber(args[1]))
     local permission = tostring(args[2]):lower()
     if Player then
@@ -136,7 +136,7 @@ PlusCoreCommands.Add('addpermission', Lang:t("command.addpermission.help"), { { 
     end
 end, 'god')
 
-PlusCoreCommands.Add('removepermission', Lang:t("command.removepermission.help"), { { name = Lang:t("command.removepermission.params.id.name"), help = Lang:t("command.removepermission.params.id.help") }, { name = Lang:t("command.removepermission.params.permission.name"), help = Lang:t("command.removepermission.params.permission.help") } }, true, function(source, args)
+PlusCore.Commands.Add('removepermission', Lang:t("command.removepermission.help"), { { name = Lang:t("command.removepermission.params.id.name"), help = Lang:t("command.removepermission.params.id.help") }, { name = Lang:t("command.removepermission.params.permission.name"), help = Lang:t("command.removepermission.params.permission.help") } }, true, function(source, args)
     local Player = PlusCore.func.GetPlayer(tonumber(args[1]))
     local permission = tostring(args[2]):lower()
     if Player then
@@ -148,7 +148,7 @@ end, 'god')
 
 -- Open & Close Server
 
-PlusCoreCommands.Add('openserver', Lang:t("command.openserver.help"), {}, false, function(source)
+PlusCore.Commands.Add('openserver', Lang:t("command.openserver.help"), {}, false, function(source)
     if not PlusCore.Config.Server.Closed then
         TriggerClientEvent('PlusCore:Notify', source, Lang:t('error.server_already_open'), 'error')
         return
@@ -161,7 +161,7 @@ PlusCoreCommands.Add('openserver', Lang:t("command.openserver.help"), {}, false,
     end
 end, 'admin')
 
-PlusCoreCommands.Add('closeserver', Lang:t("command.closeserver.help"), {{ name = Lang:t("command.closeserver.params.reason.name"), help = Lang:t("command.closeserver.params.reason.help")}}, false, function(source, args)
+PlusCore.Commands.Add('closeserver', Lang:t("command.closeserver.help"), {{ name = Lang:t("command.closeserver.params.reason.name"), help = Lang:t("command.closeserver.params.reason.help")}}, false, function(source, args)
     if PlusCore.Config.Server.Closed then
         TriggerClientEvent('PlusCore:Notify', source, Lang:t('error.server_already_closed'), 'error')
         return
@@ -183,17 +183,17 @@ end, 'admin')
 
 -- Vehicle
 
-PlusCoreCommands.Add('car', Lang:t("command.car.help"), {{ name = Lang:t("command.car.params.model.name"), help = Lang:t("command.car.params.model.help") }}, true, function(source, args)
+PlusCore.Commands.Add('car', Lang:t("command.car.help"), {{ name = Lang:t("command.car.params.model.name"), help = Lang:t("command.car.params.model.help") }}, true, function(source, args)
     TriggerClientEvent('PlusCore:Command:SpawnVehicle', source, args[1])
 end, 'admin')
 
-PlusCoreCommands.Add('dv', Lang:t("command.dv.help"), {}, false, function(source)
+PlusCore.Commands.Add('dv', Lang:t("command.dv.help"), {}, false, function(source)
     TriggerClientEvent('PlusCore:Command:DeleteVehicle', source)
 end, 'admin')
 
 -- Money
 
-PlusCoreCommands.Add('givemoney', Lang:t("command.givemoney.help"), { { name = Lang:t("command.givemoney.params.id.name"), help = Lang:t("command.givemoney.params.id.help") }, { name = Lang:t("command.givemoney.params.moneytype.name"), help = Lang:t("command.givemoney.params.moneytype.help") }, { name = Lang:t("command.givemoney.params.amount.name"), help = Lang:t("command.givemoney.params.amount.help") } }, true, function(source, args)
+PlusCore.Commands.Add('givemoney', Lang:t("command.givemoney.help"), { { name = Lang:t("command.givemoney.params.id.name"), help = Lang:t("command.givemoney.params.id.help") }, { name = Lang:t("command.givemoney.params.moneytype.name"), help = Lang:t("command.givemoney.params.moneytype.help") }, { name = Lang:t("command.givemoney.params.amount.name"), help = Lang:t("command.givemoney.params.amount.help") } }, true, function(source, args)
     local Player = PlusCore.func.GetPlayer(tonumber(args[1]))
     if Player then
         Player.Functions.AddMoney(tostring(args[2]), tonumber(args[3]))
@@ -202,7 +202,7 @@ PlusCoreCommands.Add('givemoney', Lang:t("command.givemoney.help"), { { name = L
     end
 end, 'admin')
 
-PlusCoreCommands.Add('setmoney', Lang:t("command.setmoney.help"), { { name = Lang:t("command.setmoney.params.id.name"), help = Lang:t("command.setmoney.params.id.help") }, { name = Lang:t("command.setmoney.params.moneytype.name"), help = Lang:t("command.setmoney.params.moneytype.help") }, { name = Lang:t("command.setmoney.params.amount.name"), help = Lang:t("command.setmoney.params.amount.help") } }, true, function(source, args)
+PlusCore.Commands.Add('setmoney', Lang:t("command.setmoney.help"), { { name = Lang:t("command.setmoney.params.id.name"), help = Lang:t("command.setmoney.params.id.help") }, { name = Lang:t("command.setmoney.params.moneytype.name"), help = Lang:t("command.setmoney.params.moneytype.help") }, { name = Lang:t("command.setmoney.params.amount.name"), help = Lang:t("command.setmoney.params.amount.help") } }, true, function(source, args)
     local Player = PlusCore.func.GetPlayer(tonumber(args[1]))
     if Player then
         Player.Functions.SetMoney(tostring(args[2]), tonumber(args[3]))
@@ -213,12 +213,12 @@ end, 'admin')
 
 -- Job
 
-PlusCoreCommands.Add('job', Lang:t("command.job.help"), {}, false, function(source)
+PlusCore.Commands.Add('job', Lang:t("command.job.help"), {}, false, function(source)
     local PlayerJob = PlusCore.func.GetPlayer(source).UserData.job
     TriggerClientEvent('PlusCore:Notify', source, Lang:t('info.job_info', {value = PlayerJob.label, value2 = PlayerJob.grade.name, value3 = PlayerJob.onduty}))
 end, 'user')
 
-PlusCoreCommands.Add('setjob', Lang:t("command.setjob.help"), { { name = Lang:t("command.setjob.params.id.name"), help = Lang:t("command.setjob.params.id.help") }, { name = Lang:t("command.setjob.params.job.name"), help = Lang:t("command.setjob.params.job.help") }, { name = Lang:t("command.setjob.params.grade.name"), help = Lang:t("command.setjob.params.grade.help") } }, true, function(source, args)
+PlusCore.Commands.Add('setjob', Lang:t("command.setjob.help"), { { name = Lang:t("command.setjob.params.id.name"), help = Lang:t("command.setjob.params.id.help") }, { name = Lang:t("command.setjob.params.job.name"), help = Lang:t("command.setjob.params.job.help") }, { name = Lang:t("command.setjob.params.grade.name"), help = Lang:t("command.setjob.params.grade.help") } }, true, function(source, args)
     local Player = PlusCore.func.GetPlayer(tonumber(args[1]))
     if Player then
         Player.Functions.SetJob(tostring(args[2]), tonumber(args[3]))
@@ -229,12 +229,12 @@ end, 'admin')
 
 -- Gang
 
-PlusCoreCommands.Add('gang', Lang:t("command.gang.help"), {}, false, function(source)
+PlusCore.Commands.Add('gang', Lang:t("command.gang.help"), {}, false, function(source)
     local PlayerGang = PlusCore.func.GetPlayer(source).UserData.gang
     TriggerClientEvent('PlusCore:Notify', source, Lang:t('info.gang_info', {value = PlayerGang.label, value2 = PlayerGang.grade.name}))
 end, 'user')
 
-PlusCoreCommands.Add('setgang', Lang:t("command.setgang.help"), { { name = Lang:t("command.setgang.params.id.name"), help = Lang:t("command.setgang.params.id.help") }, { name = Lang:t("command.setgang.params.gang.name"), help = Lang:t("command.setgang.params.gang.help") }, { name = Lang:t("command.setgang.params.grade.name"), help = Lang:t("command.setgang.params.grade.help") } }, true, function(source, args)
+PlusCore.Commands.Add('setgang', Lang:t("command.setgang.help"), { { name = Lang:t("command.setgang.params.id.name"), help = Lang:t("command.setgang.params.id.help") }, { name = Lang:t("command.setgang.params.gang.name"), help = Lang:t("command.setgang.params.gang.help") }, { name = Lang:t("command.setgang.params.grade.name"), help = Lang:t("command.setgang.params.grade.help") } }, true, function(source, args)
     local Player = PlusCore.func.GetPlayer(tonumber(args[1]))
     if Player then
         Player.Functions.SetGang(tostring(args[2]), tonumber(args[3]))
@@ -245,7 +245,7 @@ end, 'admin')
 
 -- Out of Character Chat
 
-PlusCoreCommands.Add('ooc', Lang:t("command.ooc.help"), {}, false, function(source, args)
+PlusCore.Commands.Add('ooc', Lang:t("command.ooc.help"), {}, false, function(source, args)
     local message = table.concat(args, ' ')
     local Players = PlusCore.func.GetPlayers()
     local Player = PlusCore.func.GetPlayer(source)
@@ -278,7 +278,7 @@ end, 'user')
 
 -- Me command
 
-PlusCoreCommands.Add('me', Lang:t("command.me.help"), {{name = Lang:t("command.me.params.message.name"), help = Lang:t("command.me.params.message.help")}}, false, function(source, args)
+PlusCore.Commands.Add('me', Lang:t("command.me.help"), {{name = Lang:t("command.me.params.message.name"), help = Lang:t("command.me.params.message.help")}}, false, function(source, args)
     if #args < 1 then TriggerClientEvent('PlusCore:Notify', source, Lang:t('error.missing_args2'), 'error') return end
     local ped = GetPlayerPed(source)
     local pCoords = GetEntityCoords(ped)

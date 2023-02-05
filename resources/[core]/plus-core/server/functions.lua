@@ -310,7 +310,7 @@ end
 function PlusCore.func.AddPermission(source, permission)
     if not IsPlayerAceAllowed(source, permission) then
         ExecuteCommand(('add_principal player.%s PlusCore%s'):format(source, permission))
-        PlusCoreCommands.Refresh(source)
+        PlusCore.Commands.Refresh(source)
     end
 end
 
@@ -318,13 +318,13 @@ function PlusCore.func.RemovePermission(source, permission)
     if permission then
         if IsPlayerAceAllowed(source, permission) then
             ExecuteCommand(('remove_principal player.%s PlusCore%s'):format(source, permission))
-            PlusCoreCommands.Refresh(source)
+            PlusCore.Commands.Refresh(source)
         end
     else
         for _, v in pairs(PlusCore.Config.Server.Permissions) do
             if IsPlayerAceAllowed(source, v) then
                 ExecuteCommand(('remove_principal player.%s PlusCore%s'):format(source, v))
-                PlusCoreCommands.Refresh(source)
+                PlusCore.Commands.Refresh(source)
             end
         end
     end

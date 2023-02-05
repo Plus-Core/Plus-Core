@@ -189,15 +189,15 @@ end)
 
 RegisterNetEvent('PlusCore:CallCommand', function(command, args)
     local src = source
-    if not PlusCoreCommands.List[command] then return end
+    if not PlusCore.Commands.List[command] then return end
     local Player = PlusCore.func.GetPlayer(src)
     if not Player then return end
-    local hasPerm = PlusCore.func.HasPermission(src, "command."..PlusCoreCommands.List[command].name)
+    local hasPerm = PlusCore.func.HasPermission(src, "command."..PlusCore.Commands.List[command].name)
     if hasPerm then
-        if PlusCoreCommands.List[command].argsrequired and #PlusCoreCommands.List[command].arguments ~= 0 and not args[#PlusCoreCommands.List[command].arguments] then
+        if PlusCore.Commands.List[command].argsrequired and #PlusCore.Commands.List[command].arguments ~= 0 and not args[#PlusCore.Commands.List[command].arguments] then
             TriggerClientEvent('PlusCore:Notify', src, Lang:t('error.missing_args2'), 'error')
         else
-            PlusCoreCommands.List[command].callback(src, args)
+            PlusCore.Commands.List[command].callback(src, args)
         end
     else
         TriggerClientEvent('PlusCore:Notify', src, Lang:t('error.no_access'), 'error')
