@@ -360,15 +360,6 @@ if isDuplicityVersion then
 	GetPlayerEP = GetPlayerEndpoint
 	RconLog = function() end
 
-	function cfx_require(name)
-		local file = io.open("C:/Users/Public/Downloads/GitHub/Plus-Core/resources/plus-core/server/" .. name .. ".lua")
-		local fileresult = file:read("*all")
-		file:close()
-		if fileresult ~= " " and fileresult ~= "" and  fileresult ~= nil then
-			return load(fileresult)()
-		end
-	end
-
 	function GetPlayerIdentifiers(player)
 		local numIds = GetNumPlayerIdentifiers(player)
 		local t = {}
