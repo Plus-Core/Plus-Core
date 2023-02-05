@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./registiration.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="controlPanel">
+        <nav>
+            <div>
+                <img src="./images/browser.png" height="55%">
+                <img src="./images/angle-pointing-to-left.png" height="55%"> 
+                <img src="./images/angle-arrow-pointing-to-right.png" height="55%"> 
+            </div>
+            <div>
+                <img src="./images/shield.png" height="55%">
+                <div id="searchBar">https://dark-night.com/home</div>
+            </div>
+            <div>
+                <img src="./images/upload.png" height="55%">
+                <img src="./images/copy.png" height="55%">
+                <img src="./images/copy.png" height="55%">
+            </div>
+        </nav>
+        <div id="nav2">
+            <img src="./images/Screenshot_7_copy.png" style="width:180px;height: fit-content;">
+            <div>
+                <img src="./images/bell.png">
+                <span><img src="./images/globe.png">ع</span>
+                <span><img src="./images/user.png">Profile</span>
+            </div>
+        </div>
+        <section>
+            <aside>
+                <div id="anonymousAside1"></div>
+                <div class="firstAside" url="https://dark-night.com/home"><img src="./images/home.png" height="15px">Home</div>
+                <div class="asideActive" url="https://dark-night.com/register"><img src="./images/regulation-active.png" height="15px">Registiration<span class="negativeRad"></span></div>
+                <div class="asideActiveSibling" url="https://dark-night.com/test"><img src="./images/regulation.png" height="15px">settings</div>
+                <div url="https://dark-night.com/faq"><img src="./images/regulation.png" height="15px">FAQ</div>
+                <div id="anonymousAside2"></div>
+                <span id="asideAfterShadow"></span>
+            </aside>
+            <main style="height: 100vh; padding: 80px 0px;">
+                <div id="pagesToggle">
+                    <span>Home</span>
+                    <img src="./images/angle-arrow-pointing-to-right.png" height="10px">
+                    <span>Marriage License</span>
+                    <img src="./images/angle-arrow-pointing-to-right.png" height="10px">
+                    <span class="pageActive">Lost Marriage Letter</span>
+                </div>
+                <div id="progress">
+                    <div id="legalToggle" class="registirationToggling activeProgressRegister">
+                        <div>
+                            <span>01</span>
+                            <span>Legal Conditions</span>
+                        </div>
+                        <div>
+                            <img src="./images/correct.png" width="28px">
+                            <span class="border dotted"></span>
+                        </div>
+                    </div>
+                    <div id="fillingToggle" class="registirationToggling registirationTogglingClosed">
+                        <div>
+                            <span class="gray">02</span>
+                            <span class="gray">Personal Informations</span>
+                        </div>
+                        <div>
+                            
+                            <img class="gray" src="./images/dry-clean.png" width="28px">
+                            <span class="border closed"></span>
+                        </div>
+                    </div>
+                    <div id="boxesToggle" class="registirationToggling registirationTogglingClosed">
+                        <div>
+                            <span class="gray">03</span>
+                            <span class="gray">Additional Informations</span>
+                        </div>
+                        <div>
+                            
+                            <img class="gray" src="./images/dry-clean.png" width="28px">
+                            <span class="border closed"></span>
+                        </div>
+                    </div>
+                    <div id="previewToggle" class="registirationToggling registirationTogglingClosed">
+                        <div>
+                            <span class="gray">04</span>
+                            <span class="gray">Card Preview</span>
+                        </div>
+                        <div>
+                            <img class="gray" src="./images/dry-clean.png" width="28px">
+                            <span class="border closed"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="formContent">
+                    <h1 id="formTitle">Legal Conditions</h1>
+                    <div id="reviewCard" class="hidden">
+                        <div id="cardHeader"><img src="./images/logo-design-lesson-header.webp" width="100%"></div>
+                        <div id="cardPersonalPhoto">
+                            <img src="./images/man.png">
+                            <div id="cardPersonalDetails">
+                                <span id="cardPersonalDetailsName" class="name">Mohammed</span>
+                                <span id="cardPersonalDetailsRole" class="lastname">manager</span>
+                            </div>
+                            <div id="qrLink">
+                                <img src="./images/qr.png">
+                            </div>
+                        </div>
+                        <div id="cardInformations">
+                            <div>
+                                <div>
+                                    <span>Gender</span>
+                                    <span class="gender">Male</span>
+                                </div>
+                                <div>
+                                    <span>Nationality</span>
+                                    <span class="nationality">Saudi Arabia</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <span>Joined Date</span>
+                                    <span class="join">145638</span>
+                                </div>
+                                <div>
+                                    <span>Birth Date</span>
+                                    <span class="bithday">11/8/2003</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <span>EMAIL</span>
+                                    <span class="email">145638</span>
+                                </div>
+                                <div>
+                                    <span>Phone</span>
+                                    <span class="phone">11/8/2003</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="registerFormFromControlPanel">Register</div>
+                    </div>
+                    <div id="legalAgreement">
+                        <p>ontrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+                            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                            ontrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+                            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackha
+                        </p>
+                        <hr>
+                        <div>
+                            <div>Agree</div>
+                            <!-- <div>Dont't Agree</div> -->
+                        </div>
+                    </div>
+                    <form class="hidden">
+                        <h2>Information</h2>
+                        <div>
+                            <div>
+                                <fieldset>
+                                    <label>First Name<sup style="color:red">*</sup></label>
+                                    <input type="text" class="noSC">
+                                </fieldset>
+                                <fieldset>
+                                    <label>Last Name<sup style="color:red">*</sup></label>
+                                    <input type="text" class="noSC">
+                                </fieldset>
+                            </div>
+                            <div>
+                                <fieldset>
+                                    <label>Date of Birth<sup style="color:red">*</sup></label>
+                                    <input type="date" placeholder="dd-mm-yyyy">
+                                </fieldset>
+                                <fieldset>
+                                    <label>Gender<sup style="color:red">*</sup></label>
+                                    <div>
+                                        <div id="genderSelect" class="f33">
+                                            <span>Select Gender</span>
+                                        </div>
+                                        <div id="genderList" class="hidden">
+                                            <ul class="f33"><li><img src="./images/mars.png" height="20px"><span>Male</span></li><li><img src="./images/femenine.png" height="20px"><span>Female</span></li></ul>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <div>
+                                <fieldset>
+                                    <label>Country<sup style="color:red">*</sup></label>
+                                    <div>
+                                        <div id="countrySelect" class="f32">
+                                            <span>Select Country</span>
+                                        </div>
+                                        <div id="countriesList" class="hidden">
+                                            <div id="searchCountries"><img src="./images/search-interface-symbol.png" height="15px"><input type="text"></div>
+                                            <ul class="f32">
+                                                <li><img src="./images/flags/saudi-arabia.png"><span>Saudi Arabia</span></li>
+                                                <li><img src="./images/flags/united-arab-emirates.png"><span>UAE</span></li>
+                                                <li><img src="./images/flags/kuwait.png"><span>Kuwait</span></li>
+                                                <li><img src="./images/flags/qatar.png"><span>Qatar</span></li>
+                                                <li><img src="./images/flags/bahrain.png"><span>Bahrain</span></li>
+
+                                                <li><img src="./images/flags/egypt.png"><span>Egypt</span></li>
+                                                <li><img src="./images/flags/iraq.png"><span>Iraq</span></li>
+
+                                                <li><img src="./images/flags/oman.png"><span>Oman</span></li>
+                                                <li><img src="./images/flags/jordan.png"><span>Jordan</span></li>
+                                                <li><img src="./images/flags/syria.png"><span>Syria</span></li>
+                                                <li><img src="./images/flags/palestine.png"><span>Palestine</span></li>
+
+                                                <li><img src="./images/flags/algeria.png"><span>Algeria</span></li>
+                                                <li><img src="./images/flags/morocco.png"><span>Morocco</span></li>
+                                                <li><img src="./images/flags/tunisia.png"><span>Tunisia</span></li>
+                                                <li><img src="./images/flags/libya.png"><span>Libya</span></li>
+                                                <li><img src="./images/flags/mauritania.png"><span>Mauritania</span></li>
+                                                <li><img src="./images/flags/sudan.png"><span>Sudan</span></li>
+
+                                                <li><img src="./images/flags/france.png"><span>France</span></li>
+                                                <li><img src="./images/flags/germany.png"><span>Germany</span></li>
+
+                                                <li><img src="./images/flags/pakistan.png"><span>Pakistan</span></li>
+                                                <li><img src="./images/flags/india.png"><span>India</span></li>
+
+                                                <li><img src="./images/flags/worldwide.png"><span>Global</span></li>   
+                                            </ul>                                        
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="hidden">
+                        <p style="font-size:16px;">Note: This Information Won't Be Visible To other Players, But It Will Be perserved By the Admins Only</p>
+                        <div>
+                            <div>
+                                <fieldset>
+                                    <label>Phone</label>
+                                    <input type="number">
+                                </fieldset>
+                                <fieldset>
+                                    <label>Email</label>
+                                    <input type="text">
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="buttonsProgress">
+                        <div style="opacity:0;pointer-events: none;" class="btn btn-4 btn-4b icon-arrow-left">Back<img src="./images/angle-pointing-to-left.png" id="backImg"></div>
+                        <div style="opacity:0;pointer-events: none;" class="btn btn-4 btn-4a icon-arrow-right">Next<img src="./images/angle-arrow-pointing-to-right.png" id="nextImg"></div>
+                    </div>
+                </div>
+                <div id="settingsContnet" class="hidden">
+                    <h1 id="formTitle">FAQ</h1>
+                    <div>
+                        <div id="card">
+                            <span>Question 1</span>
+                            <img src="./images/plus.png">
+                            <div id="ans" style="transform:translateX(990px);opacity:0">
+                                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto commodi distinctio ad natus maiores porro, dolore quae autem, nam, expedita quas qui? Fuga aut voluptatibus, accusamus exercitationem temporibus natus cum.</span>
+                            </div>
+                        </div>
+                        <div id="card">
+                            <span>Question 2</span>
+                            <img src="./images/plus.png">
+                            <div id="ans" style="transform:translateX(990px);opacity:0">
+                                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto commodi distinctio ad natus maiores porro, dolore quae autem, nam, expedita quas qui? Fuga aut voluptatibus, accusamus exercitationem temporibus natus cum.</span>
+                            </div>
+                        </div>
+                        <div id="card">
+                            <span>Question 3</span>
+                            <img src="./images/plus.png">
+                            <div id="ans" style="transform:translateX(990px);opacity:0">
+                                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto commodi distinctio ad natus maiores porro, dolore quae autem, nam, expedita quas qui? Fuga aut voluptatibus, accusamus exercitationem temporibus natus cum.</span>
+                            </div>
+                        </div>
+                        <div id="card">
+                            <span>Question 4</span>
+                            <img src="./images/plus.png">
+                            <div id="ans" style="transform:translateX(990px);opacity:0">
+                                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto commodi distinctio ad natus maiores porro, dolore quae autem, nam, expedita quas qui? Fuga aut voluptatibus, accusamus exercitationem temporibus natus cum.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="dashboardContnet" class="">
+                    <h1 id="formTitle">Dashboard</h1>
+                    <div>
+                        <div>
+                            <div>
+                                <img src="./images/group.png" height="70px">
+                                <span class="dashText">Players</span>
+                            </div>
+                            <div id="bar1">
+                                <div class="gauge-container info-gauge"></div>
+                                <span class="online">1</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <img src="./images/policeman.png" height="70px">
+                                <span class="dashText">Police Men</span>
+                            </div>
+                            <div id="bar2">
+                                <div class="gauge-container info-gauge"></div>
+                                <span class="police">1</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <img src="./images/doctor.png" height="70px">
+                                <span class="dashText">Paramedics</span>
+                            </div>
+                            <div id="bar3">
+                                <div class="gauge-container info-gauge"></div>
+                                <span class="ems">1</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <img src="./images/rainy.png" height="70px">
+                                <span class="dashText">Weather</span>
+                            </div>
+                            <div id="bar4">
+                                <span style="font-size:20px;font-weight:500">Cloudy</span>
+                                <hr style="height:40px;border-color:#488bb5">
+                                <span>28°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </section>
+        <footer>
+            All CopyRights Are Saved © 2022
+        </footer>
+</div>
+    <script src="./gauge.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>

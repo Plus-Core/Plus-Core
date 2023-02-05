@@ -1,0 +1,1022 @@
+*{
+    padding:0;
+    margin: 0;
+}
+
+:root{
+    --shadowHeight:0;
+    --shadowHeight2:0;
+    --asideAfterLeft:unset;
+    --asideAfterRight:calc(100% - 25px);
+    --asidePad:0px 0px 0px 25px;
+    --anonPad:25px 80px 25px 25px;
+    --anoPosLeft: -20px;
+    --anoPosRight:unset;
+    --anonRad2:0 20px 0 0;
+    --anonRad1: 20px 20px 0 0;
+    --asideShadow1:rgb(149 157 165 / 30%) -5px 0px 25px;
+    --asideShadow2:rgb(149 157 165 / 56%) -5px -5px 25px; 
+}
+
+body{
+    display: none;
+    background-color: white;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  ::-webkit-scrollbar-button:start{
+  background: rgba(255,255,255,1);
+  border-left: 100px;
+    height: 60px;
+}
+
+#controlPanel nav > div:nth-child(3){
+    margin-right:-4px;
+}
+
+#formTitle {
+    border-bottom: 1px solid #ccc;
+    padding: 40px 60px;
+}
+
+#controlPanel{
+    /*font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+    /* font-family: 'Bahnschrift', monospace; */
+    font-family: 'Vazirmatn', sans-serif;
+    height: fit-content;
+    width: 100%;
+
+}
+.app{
+    display: none;
+    background-color: white;
+}
+
+#controlPanel nav{
+    direction: ltr;
+    display: flex;
+    justify-content: space-between;
+    top:0;
+    height: 40px;
+    background-color: #fff;
+    padding:10px 20px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    margin-bottom: 20px;
+    position: fixed;
+    width: calc(100% - 40px);
+    z-index: 10;
+}
+
+#controlPanel nav > div{
+    display: flex;
+    align-items: center;
+    gap:15px;
+}
+
+nav >div:nth-child(2){
+    display: flex;
+    width:40%;
+}
+
+#controlPanel nav #searchBar{
+    background-color: #f4f4f4;
+    display: flex;
+    color:rgba(133, 133, 133, 0.904);
+    align-items: center;
+    width: 100%;
+    height: 90%;
+    border-radius: 4px;
+    padding-left: 10px;
+}
+
+/**************************/
+
+#nav2{
+    display: flex;
+    justify-content: space-between;
+    height: 110px;
+    padding: 5px 40px 10px 40px;
+    margin-top: 107px;
+}
+
+#nav2 > div img{
+    height: 25px;
+}
+
+#nav2 > div{
+    display: flex;
+    gap:30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#nav2 > div >span{
+    display: flex;
+    gap:10px;
+    align-items: center;
+    font-weight: 500;
+    color:#488bb5;
+}
+
+/**************************/
+
+#controlPanel > section{
+    display: flex;
+    gap:50px;
+}
+
+#controlPanel > section > aside{
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    padding: var(--asidePad);
+    width: 15%;
+    position: relative;
+    height: fit-content;
+    margin-top:55px
+}
+
+#controlPanel > section > aside::after{
+    background-color: #f5f5fd;
+    content: '';
+    position: absolute;
+    right:var(--asideAfterRight);
+    left:var(--asideAfterLeft);
+    top:calc(50% - 1px);
+    transform: translateY(-50%);
+    height: calc(101%);
+    width:25px;
+}
+
+#controlPanel > section > aside::before{
+    content: '';
+    position: absolute;
+    right:0;
+    box-shadow: var(--asideShadow2);
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    bottom:-50px;
+    height: var(--shadowHeight);
+    width:100%;
+    z-index:-1;
+}
+
+#controlPanel > section > aside > #asideAfterShadow{
+    position: absolute;
+    right:0px;
+    box-shadow: var(--asideShadow1);
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    top:-49px;
+    height: var(--shadowHeight2);
+    width:100%;
+    z-index:-1;
+}
+
+#controlPanel > section > aside > div{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    padding:var(--anonPad);
+    background-color: #f5f5fd;
+    color:#a4a5a7;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+#controlPanel > section > aside > div:last-child{
+    padding-bottom:50px;
+    border-bottom-right-radius: 20px;
+}
+
+.asideActive{
+    background-color: white!important;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    position: relative;
+    margin-right:17px!important;
+    box-shadow: inset 0 5px 10px -11px rgba(149, 157, 165, 0.3), 
+    inset 0 5px 19px -46px rgba(149, 157, 165, 0.3), 
+    inset 7px 0 6px -5px rgba(149, 157, 165, 0.3)!important;
+    color:#4b8bb7!important;
+}
+
+.asideActiveAR{
+    background-color: white!important;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    position: relative;
+    margin-left:17px!important;
+    box-shadow: inset 0 -5px 5px -5px rgba(149, 157, 165, 0.3), 
+              inset 0 5px 5px -5px rgba(149, 157, 165, 0.3), 
+              inset -5px 0 5px -5px rgba(149, 157, 165, 0.3)!important;
+    color:#4b8bb7!important;
+}
+/*
+div.asideActive::after{
+    content: '';
+    position: absolute;
+    width:100%;
+    height: 20px;
+    background: white;
+    border-bottom-right-radius: 20px;
+    left:0;
+    bottom:0;
+    z-index:2
+}*/
+
+.asideActive::after{
+    position: absolute;
+    content: '';
+    width:100%;
+    height: 100%;
+    z-index: -1;;
+    bottom:0;
+    left:0;
+    background-color:#f5f5fd ;
+}
+
+.asideActiveSibling{
+    border-top-right-radius: 20px!important;
+    position: relative;
+}
+
+.asideActiveSiblingAR{
+    border-top-left-radius: 20px!important;
+    position: relative;
+}
+
+#anonymousAside1,#anonymousAside2{
+    border-radius: var(--anonRad1);
+    /*box-shadow: 6px -2px 14px -5px rgb(0 0 0 / 20%);*/
+    width: calc(100% - 85px);
+    position: absolute;
+    bottom: 100%;
+    left: var(--anoPosLeft);
+    right: var(--anoPosRight);
+    pointer-events: none;
+}
+
+#anonymousAside2{
+    border-radius: var(--anonRad2) ;
+    bottom: unset;
+    top:100%;
+}
+
+/*********************/
+
+#controlPanel main{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    height: fit-content;
+    width:calc(100vw);
+    background-color:#f5f5fd;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    position: relative;
+    margin-bottom: 55px;
+    padding-bottom: 110px;
+}
+/**********************/
+
+#pagesToggle{
+    position: absolute;
+    bottom: calc(100% + 20px);
+    left:60px;
+    color:#8a8a8a;
+    font-size: 18px;
+}
+
+#pagesToggle span{    
+    cursor: pointer;    
+}
+
+.pageActive{
+    color:black;
+    font-weight: bold;
+}
+
+
+
+/***********************************/
+
+#progress{
+    display: flex;
+    flex-direction: row;
+    padding:50px 0 50px 0;
+    width:90%;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
+    gap:20px
+}
+
+#progress > div{
+    flex-basis: calc(25%);
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+}
+
+#progress > div > div{
+    display: flex;
+    gap:20px;
+    align-items: center;
+}
+
+#progress > div > div > span:nth-child(2){
+    font-weight: normal;
+    color:gray;
+    font-size: 16px;
+}
+
+#progress > div > div:nth-child(1){
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.border{
+    height: 0;
+    width:100%;
+    border-top: 4px solid #488bb5;
+}
+
+.dotted{
+    border-top: 4px dotted #488bb5;
+}
+
+.closed{
+    border-top: 4px solid gray;
+    opacity: 0.4;
+}
+
+.gray{
+    color:gray!important;
+    opacity: 0.4;
+}
+
+/********************************************/
+
+#legalAgreement{
+    display: flex;
+    flex-direction: column;
+    width:70%;
+    margin:50px auto 0 auto;
+    background-color: #f5f5fd;
+    border-radius: 20px;
+    padding:20px;
+    gap:20px;
+    box-shadow: rgb(100 100 111 / 20%) 0px 5px 5px 0px;
+}
+
+#legalAgreement > div{
+    display: flex;
+    justify-content: center;
+    gap:20px;
+}
+
+#legalAgreement > div > div{
+    background-color: white;
+    padding:5px 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    cursor: pointer;
+}
+
+.playerAgreed{
+    background-color: #c4ffc4!important;
+}
+
+.playerRefused{
+    background-color: #ffa5a5!important;
+}
+
+/*********************************************/
+
+#reviewCard{
+    display: flex;
+    flex-direction: column;
+    width:400px;
+    margin:50px auto 0 auto;
+    background-color: white;
+    border-radius: 20px;
+    padding:20px;
+    gap:20px;
+    box-shadow: rgb(100 100 111 / 20%) 0px 5px 5px 0px;
+    border:1px solid #ccc;
+    position: relative;
+}
+
+#reviewCard > #cardPersonalPhoto{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding:0 20px;
+    gap:30px;
+    margin-top: -9px;
+}
+
+#cardPersonalDetails{
+    display: flex;
+    flex-direction: column;
+    gap:1px;
+    margin-left: -54px;
+}
+
+#cardPersonalDetailsName{
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#reviewCard > #cardPersonalPhoto img{
+    border-radius: 50%;
+    border:5px solid white;
+    width:30%;
+    margin-top:-150px;
+}
+
+#reviewCard > #cardPersonalPhoto #qrLink img{
+    border-radius: 0;
+    border:0;
+    width:unset;
+    margin-top:0;
+    height:54px;
+}
+
+#cardInformations{
+    display: flex;
+    gap:15px;
+}
+
+#cardInformations > div{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    border-right:1px dashed gray;
+    padding-right: 10px;
+}
+
+#cardInformations > div > div{
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+#cardInformations > div > div > span:nth-child(1){
+    color:#85675f;
+}
+
+#cardInformations > div:nth-child(3){
+    border-right:0;
+}
+
+#registerFormFromControlPanel{
+    z-index: 999999999999;
+    position: absolute;
+    top:calc(100% + 30px);
+    right: 50%;
+    transform: translateX(50%);
+    background-color: #488bb5;
+    color:white;
+    padding:10px 20px;
+    border-radius: 4px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+#registerFormFromControlPanel::after,#registerFormFromControlPanel::before{
+    position: absolute;
+    content: '';
+    left:calc(100% + 10px);
+    height: 3px;
+    width: calc(200px - (50%));
+    background: linear-gradient(to right,#488bb5,transparent);
+    top:50%;
+    transform: translateY(-50%);
+}
+
+#registerFormFromControlPanel::before{
+    right:calc(100% + 10px);
+    left:unset;
+    background: linear-gradient(to left,#488bb5,transparent);
+}
+
+/*************************************************/
+
+form label{
+    color:#9b9b9b;
+}
+
+#controlPanel main > #formContent,#controlPanel main > #settingsContnet,#controlPanel main > #dashboardContnet{
+    width:90%;
+    background-color: #fff;
+    height: calc(100% - 172px);
+    margin:0 auto;
+    border-radius: 30px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 5px 5px 0px;
+    position: relative;
+    padding-bottom:150px;
+    overflow: hidden;
+}
+
+#formContent h1{
+    border-bottom: 1px solid #ccc;
+    padding: 40px 60px;
+}
+
+#formContent form{
+    width:calc(100% - 120px);
+    padding:0 60px;
+    margin:50px auto;
+    display: flex;
+    gap:40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#formContent form > div{
+    display: flex;
+    gap:40px;
+    justify-content: center;
+    width:100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#formContent form > div > div{
+    display: flex;
+    gap:40px;
+    width:100%;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+
+#formContent form h2{
+    width:100%;
+}
+
+#formContent fieldset{
+    border:0;
+    display: flex;
+    flex-direction: column;
+    width:calc(50% - 25px);
+    gap:10px;
+}
+
+#formContent input ,#formContent fieldset > div{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.1) 0px 0px 0px 1px;
+    outline: 0;
+    border:0!important;
+    border-radius: 4px;
+    padding:20px;
+    background-color: #f8f8f8;
+    position: relative;
+    transition: 0.5s;
+    outline: 1px solid transparent;
+}
+
+#formContent fieldset > div{
+    padding:0px;
+}
+
+#formContent input:focus{
+    outline-color:#5896bb;
+    background-color: #eef3f9;
+}
+
+
+#countrySelect,#genderSelect{
+    cursor: pointer;
+    padding: 16px 20px 16px 20px!important;
+    cursor: pointer;
+}
+
+#countriesList,#genderList{
+    top:100%;
+    background-color: #f8f8f8;
+    width:calc(100% - 0px);
+    right:0;
+    margin-top:19px;
+}
+
+#searchCountries{
+    background-color: white;
+    padding:10px;
+    border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 2%) 0px 1px 3px 0px, rgb(27 31 35 / 10%) 0px 0px 0px 1px;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    display: flex;
+    gap:10px;
+}
+
+#searchCountries input{
+    background-color: white;
+    box-shadow: unset!important;
+    width:90%;
+    padding:0 0 0 20px;
+}
+
+#searchCountries input:focus{
+    background: unset;
+    border: unset;
+    outline: unset;
+}
+
+/**********************************************/
+.f32{
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    margin-top:15px;
+    gap:8px;
+}
+
+ul.f32,ul.f33{
+    overflow: hidden scroll;
+}
+
+ul.f32::-webkit-scrollbar,ul.f33::-webkit-scrollbar{
+    width:3px;
+}
+
+ul.f32::-webkit-scrollbar-button:start,ul.f33::-webkit-scrollbar-button:start{
+    height: 1px;
+    border: unset;
+}
+
+.f32,.f33{
+    padding: 0 20px 20px 20px;
+}
+
+.f32 li{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.f32 img{
+    height: 20px;
+}
+
+.f33{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.f33 li{
+    list-style: none;
+    display: flex;
+    gap:8px;
+    transition: 0.2s;
+    cursor: pointer;
+    padding:10px
+}
+
+.f32 .flag{
+    width: fit-content;
+    white-space: nowrap;
+    width:calc(100% - 50px)!important;
+    cursor: pointer;
+}
+
+.f32 .flag:hover,#genderList li:hover{
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgb(0 0 0 / 2%) 0px 1px 3px 0px, rgb(27 31 35 / 10%) 0px 0px 0px 1px;
+}
+
+#genderSelect > li{
+    padding:0;
+}
+
+.hidden{
+    display: none!important;
+}
+
+#countrySelect.f32{
+    height: fit-content;
+    overflow: hidden;
+    margin-top: 0;
+}
+
+#countrySelect.f32 .flag:hover{
+    background-color: unset;
+    border-radius: 8px;
+    box-shadow: unset;
+}
+
+
+
+/**************************************/
+
+#buttonsProgress{
+    display: flex;
+    justify-content: space-between;
+    padding:20px 0px;
+    position: absolute;
+    width: 90%;
+    left:50%;
+    transform: translateX(-50%);
+    bottom:0px;
+    cursor: pointer;
+}
+
+#buttonsProgress > div{
+    position: relative;
+}
+
+#buttonsProgress > div > #backImg{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    height: 40%;
+    right:100%;
+    transition: 0.2s;
+    transition: 0.2s;
+}
+
+#buttonsProgress > div > #nextImg{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    height: 40%;
+    left:100%;
+    right: unset;
+    transition: 0.2s;
+}
+
+#buttonsProgress > div > #backImg2{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    height: 40%;
+    left:100%;
+    transition: 0.2s;
+}
+
+#buttonsProgress > div > #nextImg2{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    height: 40%;
+    right:100%;
+    left: unset;
+    transition: 0.2s;
+}
+
+#buttonsProgress > div:hover #nextImg{
+    transform: translate(-35px,-50%);
+}
+
+#buttonsProgress > div:hover #backImg{
+    transform: translate(35px,-50%);
+}
+
+#buttonsProgress > div:hover #nextImg2{
+    transform: translate(35px,-50%);
+}
+
+#buttonsProgress > div:hover #backImg2{
+    transform: translate(-35px,-50%);
+}
+
+.btn {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    padding: 15px 50px;
+    display: inline-block;
+    margin: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.btn-4 {
+    border-radius: 50px;
+    color: #9b9b9b!important;
+    border: 2px solid #9b9b9b;
+    overflow: hidden;
+}
+
+.btn-4:hover {
+    background: #f5f5fd;
+}
+
+/***********FOOTER***************/
+
+footer{
+    position: absolute;
+    background-color:#f5f5fd ;
+    box-shadow: rgb(149 157 165 / 25%) -5px -5px 25px;
+    color:#a4a5a7;
+    width:90%;
+    padding:20px;
+    margin:0 auto;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right:50%;
+    transform: translateX(50%);
+}
+/******************************************************/
+
+/*****************SETTINGS*********************/
+
+#controlPanel #settingsContnet > div{
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px;
+    width:70%;
+    align-content: center;
+    margin: 0 auto;
+    padding-top:100px;
+    position: relative;
+}
+
+#controlPanel #settingsContnet > div > div{
+    display: flex;
+    flex-direction: row;
+    background-color: #f5f5fd;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    padding : 20px 20px 20px 50px;
+    align-items: center;
+}
+
+#settingsContnet #card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 60%;
+    margin:0 auto;
+    font-size: var(--small-font);
+    background-color: var(--sec);
+    padding:10px;
+    padding-left:50px;
+    position: relative;
+    transition: 1s;
+    cursor: pointer;
+}
+
+#controlPanel #settingsContnet #ans{
+    position: absolute;
+    top:100%;
+    width: calc(100% - 20px);
+    height: fit-content;
+    right:0;
+    padding:10px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    border-top:0;
+    color:black;
+    transition: 1s;
+    overflow: hidden;
+}
+#controlPanel #settingsContnet #card img{
+    z-index:100;
+    height: 20px;
+    width: fit-content;
+}
+
+#controlPanel #settingsContnet #ans span{
+    word-break:break-all;
+    z-index:-7;
+    font-size:20px;
+}
+
+#controlPanel #settingsContnet #card > span{
+    font-size:25px;
+}
+
+/************************************************/
+
+.gauge-container text{
+    display: none;
+}
+
+.gauge-container {
+    width: 80px;
+    height: 80px;
+    display: block;
+    float: left;
+    border-radius: 3px;
+    position: relative;
+  }
+  .gauge-container > .label {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline-block;
+    background: rgba(0,0,0,0.5);
+    font-family: monospace;
+    font-size: 0.8em;
+    padding: 5px 10px;
+  }
+  .gauge-container > .gauge .dial {
+    stroke: #334455;
+    stroke-width: 8;
+    fill: rgba(0,0,0,0);
+    stroke-linecap: round;
+  }
+  .gauge-container > .gauge .value {
+    stroke: #488bb5;
+    stroke-width: 10;
+    fill: rgba(0,0,0,0);
+    stroke-linecap: round;
+  }
+  .wrapper {
+    height: 100px;
+    float: left;
+    margin: 7px;
+    overflow: hidden;
+  }
+  .wrapper > .gauge-container {
+    margin: 0;
+  }
+  
+  .gauge-container.three {
+  }
+  .gauge-container.three > .gauge .dial {
+    stroke: #a4a8a9;
+    stroke-width: 4;
+  }
+  .gauge-container.three > .gauge .value {
+    stroke: yellow;
+    stroke-width: 5;
+  }
+.gauge-container.three > .gauge .value-text {
+    fill: transparent;
+} 
+
+#dashboardContnet > div{
+    display: flex;
+    gap:40px;
+    flex-wrap: wrap;
+    width:80%;
+    padding: 60px 10% 0 10%;
+}
+
+#dashboardContnet > div > div{
+    display: flex;
+    gap:20px;
+    align-items: center;
+    background-color: rgb(245, 245, 253);
+    justify-content: space-between;
+    padding:30px;
+    border-radius: 30px;
+    flex-basis: calc(50% - 80px);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#dashboardContnet > div > div > div{
+    display: flex;
+    gap:20px;
+    align-items: center;
+}
+
+#dashboardContnet > div > div > div:nth-child(1) > span{
+    font-size:20px;
+    font-weight: 500;
+}
+
+#dashboardContnet > div > div > div:nth-child(2) > span{
+    font-size:25px;
+    font-weight: 700;
+}
