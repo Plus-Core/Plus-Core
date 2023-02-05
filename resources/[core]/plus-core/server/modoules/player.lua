@@ -1,0 +1,1 @@
+PlusCore.user = {}
