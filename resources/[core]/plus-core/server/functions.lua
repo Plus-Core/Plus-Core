@@ -207,7 +207,7 @@ function PaycheckInterval()
                 local payment = PlusShared.Jobs[Player.UserData.job.name]['grades'][tostring(Player.UserData.job.grade.level)].payment
                 if not payment then payment = Player.UserData.job.payment end
                 if Player.UserData.job and payment > 0 and (PlusShared.Jobs[Player.UserData.job.name].offDutyPay or Player.UserData.job.onduty) then
-                    if PlusCoreConfig.Money.PayCheckSociety then
+                    if PlusCore.Config.Money.PayCheckSociety then
                         local account = exports['qb-management']:GetAccount(Player.UserData.job.name)
                         if account ~= 0 then -- Checks if player is employed by a society
                             if account < payment then -- Checks if company has enough money to pay society
@@ -229,25 +229,25 @@ function PaycheckInterval()
             end
         end
     end
-    SetTimeout(PlusCoreConfig.Money.PayCheckTimeOut * (60 * 1000), PaycheckInterval)
+    SetTimeout(PlusCore.Config.Money.PayCheckTimeOut * (60 * 1000), PaycheckInterval)
 end
 
 -- Callback Functions --
 
 -- Client Callback
 function PlusCore.func.TriggerClientCallback(name, source, cb, ...)
-    PlusCoreClientCallbacks[name] = cb
+    PlusCore.ClientCallbacks[name] = cb
     TriggerClientEvent('PlusCore:Client:TriggerClientCallback', source, name, ...)
 end
 
 -- Server Callback
 function PlusCore.func.CreateCallback(name, cb)
-    PlusCoreServerCallbacks[name] = cb
+    PlusCore.ServerCallbacks[name] = cb
 end
 
 function PlusCore.func.TriggerCallback(name, source, cb, ...)
-    if not PlusCoreServerCallbacks[name] then return end
-    PlusCoreServerCallbacks[name](source, cb, ...)
+    if not PlusCore.ServerCallbacks[name] then return end
+    PlusCore.ServerCallbacks[name](source, cb, ...)
 end
 
 -- Items
@@ -268,7 +268,7 @@ end
 -- Kick Player
 
 function PlusCore.func.Kick(source, reason, setKickReason, deferrals)
-    reason = '\n' .. reason .. '\n🔸 Check our Discord for further information: ' .. PlusCoreConfig.Server.Discord
+    reason = '\n' .. reason .. '\n🔸 Check our Discord for further information: ' .. PlusCore.Config.Server.Discord
     if setKickReason then
         setKickReason(reason)
     end
@@ -300,8 +300,8 @@ end
 -- Check if player is whitelisted, kept like this for backwards compatibility or future plans
 
 function PlusCore.func.IsWhitelisted(source)
-    if not PlusCoreConfig.Server.Whitelist then return true end
-    if PlusCore.func.HasPermission(source, PlusCoreConfig.Server.WhitelistPermission) then return true end
+    if not PlusCore.Config.Server.Whitelist then return true end
+    if PlusCore.func.HasPermission(source, PlusCore.Config.Server.WhitelistPermission) then return true end
     return false
 end
 
@@ -321,7 +321,7 @@ function PlusCore.func.RemovePermission(source, permission)
             PlusCoreCommands.Refresh(source)
         end
     else
-        for _, v in pairs(PlusCoreConfig.Server.Permissions) do
+        for _, v in pairs(PlusCore.Config.Server.Permissions) do
             if IsPlayerAceAllowed(source, v) then
                 ExecuteCommand(('remove_principal player.%s PlusCore%s'):format(source, v))
                 PlusCoreCommands.Refresh(source)
@@ -347,7 +347,7 @@ end
 function PlusCore.func.GetPermission(source)
     local src = source
     local perms = {}
-    for _, v in pairs (PlusCoreConfig.Server.Permissions) do
+    for _, v in pairs (PlusCore.Config.Server.Permissions) do
         if IsPlayerAceAllowed(src, v) then
             perms[v] = true
         end

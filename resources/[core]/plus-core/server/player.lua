@@ -71,7 +71,7 @@ function PlusCore.User.CheckUserData(source, UserData)
     UserData.cid = UserData.cid or 1
     UserData.money = UserData.money or {}
     UserData.optin = UserData.optin or true
-    for moneytype, startamount in pairs(PlusCoreConfig.Money.MoneyTypes) do
+    for moneytype, startamount in pairs(PlusCore.Config.Money.MoneyTypes) do
         UserData.money[moneytype] = UserData.money[moneytype] or startamount
     end
 
@@ -101,7 +101,7 @@ function PlusCore.User.CheckUserData(source, UserData)
     UserData.metadata['phone'] = UserData.metadata['phone'] or {}
     UserData.metadata['fitbit'] = UserData.metadata['fitbit'] or {}
     UserData.metadata['commandbinds'] = UserData.metadata['commandbinds'] or {}
-    UserData.metadata['bloodtype'] = UserData.metadata['bloodtype'] or PlusCoreConfig.Player.Bloodtypes[math.random(1, #PlusCoreConfig.Player.Bloodtypes)]
+    UserData.metadata['bloodtype'] = UserData.metadata['bloodtype'] or PlusCore.Config.Player.Bloodtypes[math.random(1, #PlusCore.Config.Player.Bloodtypes)]
     UserData.metadata['dealerrep'] = UserData.metadata['dealerrep'] or 0
     UserData.metadata['craftingrep'] = UserData.metadata['craftingrep'] or 0
     UserData.metadata['attachmentcraftingrep'] = UserData.metadata['attachmentcraftingrep'] or 0
@@ -135,21 +135,21 @@ function PlusCore.User.CheckUserData(source, UserData)
         InstalledApps = {},
     }
     -- Job
-    if UserData.job and UserData.job.name and not PlusCoreShared.Jobs[UserData.job.name] then UserData.job = nil end
+    if UserData.job and UserData.job.name and not PlusCore.Shared.Jobs[UserData.job.name] then UserData.job = nil end
     UserData.job = UserData.job or {}
     UserData.job.name = UserData.job.name or 'unemployed'
     UserData.job.label = UserData.job.label or 'Civilian'
     UserData.job.payment = UserData.job.payment or 10
     UserData.job.type = UserData.job.type or 'none'
-    if PlusCoreShared.ForceJobDefaultDutyAtLogin or UserData.job.onduty == nil then
-        UserData.job.onduty = PlusCoreShared.Jobs[UserData.job.name].defaultDuty
+    if PlusCore.Shared.ForceJobDefaultDutyAtLogin or UserData.job.onduty == nil then
+        UserData.job.onduty = PlusCore.Shared.Jobs[UserData.job.name].defaultDuty
     end
     UserData.job.isboss = UserData.job.isboss or false
     UserData.job.grade = UserData.job.grade or {}
     UserData.job.grade.name = UserData.job.grade.name or 'Freelancer'
     UserData.job.grade.level = UserData.job.grade.level or 0
     -- Gang
-    if UserData.gang and UserData.gang.name and not PlusCoreShared.Gangs[UserData.gang.name] then UserData.gang = nil end
+    if UserData.gang and UserData.gang.name and not PlusCore.Shared.Gangs[UserData.gang.name] then UserData.gang = nil end
     UserData.gang = UserData.gang or {}
     UserData.gang.name = UserData.gang.name or 'none'
     UserData.gang.label = UserData.gang.label or 'No Gang Affiliaton'
@@ -192,13 +192,13 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
     function self.Functions.SetJob(job, grade)
         job = job:lower()
         grade = tostring(grade) or '0'
-        if not PlusCoreShared.Jobs[job] then return false end
+        if not PlusCore.Shared.Jobs[job] then return false end
         self.UserData.job.name = job
-        self.UserData.job.label = PlusCoreShared.Jobs[job].label
-        self.UserData.job.onduty = PlusCoreShared.Jobs[job].defaultDuty
-        self.UserData.job.type = PlusCoreShared.Jobs[job].type or 'none'
-        if PlusCoreShared.Jobs[job].grades[grade] then
-            local jobgrade = PlusCoreShared.Jobs[job].grades[grade]
+        self.UserData.job.label = PlusCore.Shared.Jobs[job].label
+        self.UserData.job.onduty = PlusCore.Shared.Jobs[job].defaultDuty
+        self.UserData.job.type = PlusCore.Shared.Jobs[job].type or 'none'
+        if PlusCore.Shared.Jobs[job].grades[grade] then
+            local jobgrade = PlusCore.Shared.Jobs[job].grades[grade]
             self.UserData.job.grade = {}
             self.UserData.job.grade.name = jobgrade.name
             self.UserData.job.grade.level = tonumber(grade)
@@ -224,11 +224,11 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
     function self.Functions.SetGang(gang, grade)
         gang = gang:lower()
         grade = tostring(grade) or '0'
-        if not PlusCoreShared.Gangs[gang] then return false end
+        if not PlusCore.Shared.Gangs[gang] then return false end
         self.UserData.gang.name = gang
-        self.UserData.gang.label = PlusCoreShared.Gangs[gang].label
-        if PlusCoreShared.Gangs[gang].grades[grade] then
-            local ganggrade = PlusCoreShared.Gangs[gang].grades[grade]
+        self.UserData.gang.label = PlusCore.Shared.Gangs[gang].label
+        if PlusCore.Shared.Gangs[gang].grades[grade] then
+            local ganggrade = PlusCore.Shared.Gangs[gang].grades[grade]
             self.UserData.gang.grade = {}
             self.UserData.gang.grade.name = ganggrade.name
             self.UserData.gang.grade.level = tonumber(grade)
@@ -310,7 +310,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         amount = tonumber(amount)
         if amount < 0 then return end
         if not self.UserData.money[moneytype] then return false end
-        for _, mtype in pairs(PlusCoreConfig.Money.DontAllowMinus) do
+        for _, mtype in pairs(PlusCore.Config.Money.DontAllowMinus) do
             if mtype == moneytype then
                 if (self.UserData.money[moneytype] - amount) < 0 then
                     return false
@@ -615,7 +615,7 @@ function PlusCore.User.CreateCitizenId()
     local UniqueFound = false
     local CitizenId = nil
     while not UniqueFound do
-        CitizenId = tostring(PlusCoreShared.RandomStr(3) .. PlusCoreShared.RandomInt(5)):upper()
+        CitizenId = tostring(PlusCore.Shared.RandomStr(3) .. PlusCore.Shared.RandomInt(5)):upper()
         local result = MySQL.prepare.await('SELECT COUNT(*) as count FROM players WHERE citizenid = ?', { CitizenId })
         if result == 0 then
             UniqueFound = true
@@ -656,7 +656,7 @@ function PlusCore.User.CreateFingerId()
     local UniqueFound = false
     local FingerId = nil
     while not UniqueFound do
-        FingerId = tostring(PlusCoreShared.RandomStr(2) .. PlusCoreShared.RandomInt(3) .. PlusCoreShared.RandomStr(1) .. PlusCoreShared.RandomInt(2) .. PlusCoreShared.RandomStr(3) .. PlusCoreShared.RandomInt(4))
+        FingerId = tostring(PlusCore.Shared.RandomStr(2) .. PlusCore.Shared.RandomInt(3) .. PlusCore.Shared.RandomStr(1) .. PlusCore.Shared.RandomInt(2) .. PlusCore.Shared.RandomStr(3) .. PlusCore.Shared.RandomInt(4))
         local query = '%' .. FingerId .. '%'
         local result = MySQL.prepare.await('SELECT COUNT(*) as count FROM `players` WHERE `metadata` LIKE ?', { query })
         if result == 0 then

@@ -82,7 +82,7 @@ function PlusCore.func.LoadAnimSet(animSet)
 end
 
 RegisterNUICallback('getNotifyConfig', function(_, cb)
-    cb(PlusCoreConfig.Notify)
+    cb(PlusCore.Config.Notify)
 end)
 
 function PlusCore.func.Notify(text, texttype, length)
@@ -118,17 +118,17 @@ end
 
 -- Client Callback
 function PlusCore.func.CreateClientCallback(name, cb)
-    PlusCoreClientCallbacks[name] = cb
+    PlusCore.ClientCallbacks[name] = cb
 end
 
 function PlusCore.func.TriggerClientCallback(name, cb, ...)
-    if not PlusCoreClientCallbacks[name] then return end
-    PlusCoreClientCallbacks[name](cb, ...)
+    if not PlusCore.ClientCallbacks[name] then return end
+    PlusCore.ClientCallbacks[name](cb, ...)
 end
 
 -- Server Callback
 function PlusCore.func.TriggerCallback(name, cb, ...)
-    PlusCoreServerCallbacks[name] = cb
+    PlusCore.ServerCallbacks[name] = cb
     TriggerServerEvent('PlusCore:Server:TriggerCallback', name, ...)
 end
 
@@ -217,11 +217,11 @@ function PlusCore.func.IsWearingGloves()
     local armIndex = GetPedDrawableVariation(ped, 3)
     local model = GetEntityModel(ped)
     if model == `mp_m_freemode_01` then
-        if PlusCoreShared.MaleNoGloves[armIndex] then
+        if PlusCore.Shared.MaleNoGloves[armIndex] then
             return false
         end
     else
-        if PlusCoreShared.FemaleNoGloves[armIndex] then
+        if PlusCore.Shared.FemaleNoGloves[armIndex] then
             return false
         end
     end
@@ -389,7 +389,7 @@ end
 
 function PlusCore.func.GetPlate(vehicle)
     if vehicle == 0 then return end
-    return PlusCoreShared.Trim(GetVehicleNumberPlateText(vehicle))
+    return PlusCore.Shared.Trim(GetVehicleNumberPlateText(vehicle))
 end
 
 function PlusCore.func.GetVehicleLabel(vehicle)
@@ -473,12 +473,12 @@ function PlusCore.func.GetVehicleProperties(vehicle)
             model = GetEntityModel(vehicle),
             plate = PlusCore.func.GetPlate(vehicle),
             plateIndex = GetVehicleNumberPlateTextIndex(vehicle),
-            bodyHealth = PlusCoreShared.Round(GetVehicleBodyHealth(vehicle), 0.1),
-            engineHealth = PlusCoreShared.Round(GetVehicleEngineHealth(vehicle), 0.1),
-            tankHealth = PlusCoreShared.Round(GetVehiclePetrolTankHealth(vehicle), 0.1),
-            fuelLevel = PlusCoreShared.Round(GetVehicleFuelLevel(vehicle), 0.1),
-            dirtLevel = PlusCoreShared.Round(GetVehicleDirtLevel(vehicle), 0.1),
-            oilLevel = PlusCoreShared.Round(GetVehicleOilLevel(vehicle), 0.1),
+            bodyHealth = PlusCore.Shared.Round(GetVehicleBodyHealth(vehicle), 0.1),
+            engineHealth = PlusCore.Shared.Round(GetVehicleEngineHealth(vehicle), 0.1),
+            tankHealth = PlusCore.Shared.Round(GetVehiclePetrolTankHealth(vehicle), 0.1),
+            fuelLevel = PlusCore.Shared.Round(GetVehicleFuelLevel(vehicle), 0.1),
+            dirtLevel = PlusCore.Shared.Round(GetVehicleDirtLevel(vehicle), 0.1),
+            oilLevel = PlusCore.Shared.Round(GetVehicleOilLevel(vehicle), 0.1),
             color1 = colorPrimary,
             color2 = colorSecondary,
             pearlescentColor = pearlescentColor,

@@ -149,12 +149,12 @@ end, 'god')
 -- Open & Close Server
 
 PlusCoreCommands.Add('openserver', Lang:t("command.openserver.help"), {}, false, function(source)
-    if not PlusCoreConfig.Server.Closed then
+    if not PlusCore.Config.Server.Closed then
         TriggerClientEvent('PlusCore:Notify', source, Lang:t('error.server_already_open'), 'error')
         return
     end
     if PlusCore.func.HasPermission(source, 'admin') then
-        PlusCoreConfig.Server.Closed = false
+        PlusCore.Config.Server.Closed = false
         TriggerClientEvent('PlusCore:Notify', source, Lang:t('success.server_opened'), 'success')
     else
         PlusCore.func.Kick(source, Lang:t("error.no_permission"), nil, nil)
@@ -162,16 +162,16 @@ PlusCoreCommands.Add('openserver', Lang:t("command.openserver.help"), {}, false,
 end, 'admin')
 
 PlusCoreCommands.Add('closeserver', Lang:t("command.closeserver.help"), {{ name = Lang:t("command.closeserver.params.reason.name"), help = Lang:t("command.closeserver.params.reason.help")}}, false, function(source, args)
-    if PlusCoreConfig.Server.Closed then
+    if PlusCore.Config.Server.Closed then
         TriggerClientEvent('PlusCore:Notify', source, Lang:t('error.server_already_closed'), 'error')
         return
     end
     if PlusCore.func.HasPermission(source, 'admin') then
         local reason = args[1] or 'No reason specified'
-        PlusCoreConfig.Server.Closed = true
-        PlusCoreConfig.Server.ClosedReason = reason
+        PlusCore.Config.Server.Closed = true
+        PlusCore.Config.Server.ClosedReason = reason
         for k in pairs(PlusCore.Users) do
-            if not PlusCore.func.HasPermission(k, PlusCoreConfig.Server.WhitelistPermission) then
+            if not PlusCore.func.HasPermission(k, PlusCore.Config.Server.WhitelistPermission) then
                 PlusCore.func.Kick(k, reason, nil, nil)
             end
         end

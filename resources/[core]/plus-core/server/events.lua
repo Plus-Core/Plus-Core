@@ -28,9 +28,9 @@ local function onPlayerConnecting(name, _, deferrals)
     -- Mandatory wait
     Wait(0)
 
-    if PlusCoreConfig.Server.Closed then
+    if PlusCore.Config.Server.Closed then
         if not IsPlayerAceAllowed(src, 'qbadmin.join') then
-            deferrals.done(PlusCoreConfig.Server.ClosedReason)
+            deferrals.done(PlusCore.Config.Server.ClosedReason)
         end
     end
 
@@ -50,7 +50,7 @@ local function onPlayerConnecting(name, _, deferrals)
 
     local isBanned, Reason = PlusCore.func.IsPlayerBanned(src)
     local isLicenseAlreadyInUse = PlusCore.func.IsLicenseInUse(license)
-    local isWhitelist, whitelisted = PlusCoreConfig.Server.Whitelist, PlusCore.func.IsWhitelisted(src)
+    local isWhitelist, whitelisted = PlusCore.Config.Server.Whitelist, PlusCore.func.IsWhitelisted(src)
 
     Wait(2500)
 
@@ -60,7 +60,7 @@ local function onPlayerConnecting(name, _, deferrals)
       deferrals.done(Lang:t('error.no_valid_license'))
     elseif isBanned then
         deferrals.done(Reason)
-    elseif isLicenseAlreadyInUse and PlusCoreConfig.Server.CheckDuplicateLicense then
+    elseif isLicenseAlreadyInUse and PlusCore.Config.Server.CheckDuplicateLicense then
         deferrals.done(Lang:t('error.duplicate_license'))
     elseif isWhitelist and not whitelisted then
       deferrals.done(Lang:t('error.not_whitelisted'))
@@ -79,10 +79,10 @@ RegisterNetEvent('PlusCore:Server:CloseServer', function(reason)
     local src = source
     if PlusCore.func.HasPermission(src, 'admin') then
         reason = reason or 'No reason specified'
-        PlusCoreConfig.Server.Closed = true
-        PlusCoreConfig.Server.ClosedReason = reason
+        PlusCore.Config.Server.Closed = true
+        PlusCore.Config.Server.ClosedReason = reason
         for k in pairs(PlusCore.Users) do
-            if not PlusCore.func.HasPermission(k, PlusCoreConfig.Server.WhitelistPermission) then
+            if not PlusCore.func.HasPermission(k, PlusCore.Config.Server.WhitelistPermission) then
                 PlusCore.func.Kick(k, reason, nil, nil)
             end
         end
@@ -94,7 +94,7 @@ end)
 RegisterNetEvent('PlusCore:Server:OpenServer', function()
     local src = source
     if PlusCore.func.HasPermission(src, 'admin') then
-        PlusCoreConfig.Server.Closed = false
+        PlusCore.Config.Server.Closed = false
     else
         PlusCore.func.Kick(src, Lang:t("error.no_permission"), nil, nil)
     end
@@ -104,9 +104,9 @@ end)
 
 -- Client Callback
 RegisterNetEvent('PlusCore:Server:TriggerClientCallback', function(name, ...)
-    if PlusCoreClientCallbacks[name] then
-        PlusCoreClientCallbacks[name](...)
-        PlusCoreClientCallbacks[name] = nil
+    if PlusCore.ClientCallbacks[name] then
+        PlusCore.ClientCallbacks[name](...)
+        PlusCore.ClientCallbacks[name] = nil
     end
 end)
 
@@ -124,8 +124,8 @@ RegisterNetEvent('PlusCore:UpdatePlayer', function()
     local src = source
     local Player = PlusCore.func.GetPlayer(src)
     if not Player then return end
-    local newHunger = Player.UserData.metadata['hunger'] - PlusCoreConfig.Player.HungerRate
-    local newThirst = Player.UserData.metadata['thirst'] - PlusCoreConfig.Player.ThirstRate
+    local newHunger = Player.UserData.metadata['hunger'] - PlusCore.Config.Player.HungerRate
+    local newThirst = Player.UserData.metadata['thirst'] - PlusCore.Config.Player.ThirstRate
     if newHunger <= 0 then
         newHunger = 0
     end

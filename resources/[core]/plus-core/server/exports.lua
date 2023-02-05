@@ -36,11 +36,11 @@ local function AddJob(jobName, job)
         return false, "invalid_job_name"
     end
 
-    if PlusCoreShared.Jobs[jobName] then
+    if PlusCore.Shared.Jobs[jobName] then
         return false, "job_exists"
     end
 
-    PlusCoreShared.Jobs[jobName] = job
+    PlusCore.Shared.Jobs[jobName] = job
 
     TriggerClientEvent('PlusCore:Client:OnSharedUpdate', -1, 'Jobs', jobName, job)
     TriggerEvent('PlusCore:Server:UpdateObject')
@@ -64,14 +64,14 @@ local function AddJobs(jobs)
             break
         end
 
-        if PlusCoreShared.Jobs[key] then
+        if PlusCore.Shared.Jobs[key] then
             message = 'job_exists'
             shouldContinue = false
             errorItem = jobs[key]
             break
         end
 
-        PlusCoreShared.Jobs[key] = value
+        PlusCore.Shared.Jobs[key] = value
     end
 
     if not shouldContinue then return false, message, errorItem end
@@ -89,11 +89,11 @@ local function RemoveJob(jobName)
         return false, "invalid_job_name"
     end
 
-    if not PlusCoreShared.Jobs[jobName] then
+    if not PlusCore.Shared.Jobs[jobName] then
         return false, "job_not_exists"
     end
 
-    PlusCoreShared.Jobs[jobName] = nil
+    PlusCore.Shared.Jobs[jobName] = nil
 
     TriggerClientEvent('PlusCore:Client:OnSharedUpdate', -1, 'Jobs', jobName, nil)
     TriggerEvent('PlusCore:Server:UpdateObject')
@@ -109,11 +109,11 @@ local function UpdateJob(jobName, job)
         return false, "invalid_job_name"
     end
 
-    if not PlusCoreShared.Jobs[jobName] then
+    if not PlusCore.Shared.Jobs[jobName] then
         return false, "job_not_exists"
     end
 
-    PlusCoreShared.Jobs[jobName] = job
+    PlusCore.Shared.Jobs[jobName] = job
 
     TriggerClientEvent('PlusCore:Client:OnSharedUpdate', -1, 'Jobs', jobName, job)
     TriggerEvent('PlusCore:Server:UpdateObject')
@@ -129,11 +129,11 @@ local function AddItem(itemName, item)
         return false, "invalid_item_name"
     end
 
-    if PlusCoreShared.Items[itemName] then
+    if PlusCore.Shared.Items[itemName] then
         return false, "item_exists"
     end
 
-    PlusCoreShared.Items[itemName] = item
+    PlusCore.Shared.Items[itemName] = item
 
     TriggerClientEvent('PlusCore:Client:OnSharedUpdate', -1, 'Items', itemName, item)
     TriggerEvent('PlusCore:Server:UpdateObject')
@@ -148,10 +148,10 @@ local function UpdateItem(itemName, item)
     if type(itemName) ~= "string" then
         return false, "invalid_item_name"
     end
-    if not PlusCoreShared.Items[itemName] then
+    if not PlusCore.Shared.Items[itemName] then
         return false, "item_not_exists"
     end
-    PlusCoreShared.Items[itemName] = item
+    PlusCore.Shared.Items[itemName] = item
     TriggerClientEvent('PlusCore:Client:OnSharedUpdate', -1, 'Items', itemName, item)
     TriggerEvent('PlusCore:Server:UpdateObject')
     return true, "success"
@@ -174,14 +174,14 @@ local function AddItems(items)
             break
         end
 
-        if PlusCoreShared.Items[key] then
+        if PlusCore.Shared.Items[key] then
             message = "item_exists"
             shouldContinue = false
             errorItem = items[key]
             break
         end
 
-        PlusCoreShared.Items[key] = value
+        PlusCore.Shared.Items[key] = value
     end
 
     if not shouldContinue then return false, message, errorItem end
@@ -199,11 +199,11 @@ local function RemoveItem(itemName)
         return false, "invalid_item_name"
     end
 
-    if not PlusCoreShared.Items[itemName] then
+    if not PlusCore.Shared.Items[itemName] then
         return false, "item_not_exists"
     end
 
-    PlusCoreShared.Items[itemName] = nil
+    PlusCore.Shared.Items[itemName] = nil
 
     TriggerClientEvent('PlusCore:Client:OnSharedUpdate', -1, 'Items', itemName, nil)
     TriggerEvent('PlusCore:Server:UpdateObject')
@@ -219,11 +219,11 @@ local function AddGang(gangName, gang)
         return false, "invalid_gang_name"
     end
 
-    if PlusCoreShared.Gangs[gangName] then
+    if PlusCore.Shared.Gangs[gangName] then
         return false, "gang_exists"
     end
 
-    PlusCoreShared.Gangs[gangName] = gang
+    PlusCore.Shared.Gangs[gangName] = gang
 
     TriggerClientEvent('PlusCore:Client:OnSharedUpdate', -1, 'Gangs', gangName, gang)
     TriggerEvent('PlusCore:Server:UpdateObject')
@@ -247,14 +247,14 @@ local function AddGangs(gangs)
             break
         end
 
-        if PlusCoreShared.Gangs[key] then
+        if PlusCore.Shared.Gangs[key] then
             message = "gang_exists"
             shouldContinue = false
             errorItem = gangs[key]
             break
         end
 
-        PlusCoreShared.Gangs[key] = value
+        PlusCore.Shared.Gangs[key] = value
     end
 
     if not shouldContinue then return false, message, errorItem end
@@ -272,11 +272,11 @@ local function RemoveGang(gangName)
         return false, "invalid_gang_name"
     end
 
-    if not PlusCoreShared.Gangs[gangName] then
+    if not PlusCore.Shared.Gangs[gangName] then
         return false, "gang_not_exists"
     end
 
-    PlusCoreShared.Gangs[gangName] = nil
+    PlusCore.Shared.Gangs[gangName] = nil
 
     TriggerClientEvent('PlusCore:Client:OnSharedUpdate', -1, 'Gangs', gangName, nil)
     TriggerEvent('PlusCore:Server:UpdateObject')
@@ -292,11 +292,11 @@ local function UpdateGang(gangName, gang)
         return false, "invalid_gang_name"
     end
 
-    if not PlusCoreShared.Gangs[gangName] then
+    if not PlusCore.Shared.Gangs[gangName] then
         return false, "gang_not_exists"
     end
 
-    PlusCoreShared.Gangs[gangName] = gang
+    PlusCore.Shared.Gangs[gangName] = gang
 
     TriggerClientEvent('PlusCore:Client:OnSharedUpdate', -1, 'Gangs', gangName, gang)
     TriggerEvent('PlusCore:Server:UpdateObject')
@@ -328,7 +328,7 @@ local function ExploitBan(playerId, origin)
         2147483647,
         'Anti Cheat'
     })
-    DropPlayer(playerId, Lang:t('info.exploit_banned', {discord = PlusCoreConfig.Server.Discord}))
+    DropPlayer(playerId, Lang:t('info.exploit_banned', {discord = PlusCore.Config.Server.Discord}))
     TriggerEvent("qb-log:server:CreateLog", "anticheat", "Anti-Cheat", "red", name .. " has been banned for exploiting " .. origin, true)
 end
 

@@ -189,9 +189,9 @@ end)
 
 -- Server Callback
 RegisterNetEvent('PlusCore:Client:TriggerCallback', function(name, ...)
-    if PlusCoreServerCallbacks[name] then
-        PlusCoreServerCallbacks[name](...)
-        PlusCoreServerCallbacks[name] = nil
+    if PlusCore.ServerCallbacks[name] then
+        PlusCore.ServerCallbacks[name](...)
+        PlusCore.ServerCallbacks[name] = nil
     end
 end)
 
@@ -230,13 +230,13 @@ end)
 
 -- Listen to Shared being updated
 RegisterNetEvent('PlusCore:Client:OnSharedUpdate', function(tableName, key, value)
-    PlusCoreShared[tableName][key] = value
+    PlusCore.Shared[tableName][key] = value
     TriggerEvent('PlusCore:Client:UpdateObject')
 end)
 
 RegisterNetEvent('PlusCore:Client:OnSharedUpdateMultiple', function(tableName, values)
     for key, value in pairs(values) do
-        PlusCoreShared[tableName][key] = value
+        PlusCore.Shared[tableName][key] = value
     end
     TriggerEvent('PlusCore:Client:UpdateObject')
 end)

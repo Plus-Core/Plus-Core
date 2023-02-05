@@ -2,7 +2,7 @@ CreateThread(function()
     while true do
         local sleep = 0
         if LocalPlayer.state.isLoggedIn then
-            sleep = (1000 * 60) * PlusCoreConfig.UpdateInterval
+            sleep = (1000 * 60) * PlusCore.Config.UpdateInterval
             TriggerServerEvent('PlusCore:UpdatePlayer')
         end
         Wait(sleep)
@@ -19,6 +19,6 @@ CreateThread(function()
                 SetEntityHealth(ped, currentHealth - decreaseThreshold)
             end
         end
-        Wait(PlusCoreConfig.StatusInterval)
+        Wait(PlusCore.Config.StatusInterval)
     end
 end)
