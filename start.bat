@@ -1,1 +1,1 @@
-.\FXServer.exe +exec server.cfg
+.\FXServer\FXServer.exe +exec server.cfg
