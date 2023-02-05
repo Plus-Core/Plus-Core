@@ -10,8 +10,7 @@ client_scripts {
     "client/**/*.lua",
 }
 server_scripts {
-    '@mysql-async/lib/MySQL.lua',
-    '@mongodb-driver/lib/mongodb.lua',
+    "@oxmysql/lib/MySQL.lua",
     "server/*.lua",
     "server/**/*.lua",
 }
