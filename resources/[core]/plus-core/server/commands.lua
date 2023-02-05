@@ -6,7 +6,7 @@ PlusCoreCommands.IgnoreList = { -- Ignore old perm levels while keeping backward
 }
 
 CreateThread(function() -- Add ace to node for perm checking
-    local permissions = Plus-Config.Server.Permissions
+    local permissions = PlusConfig.Server.Permissions
     for i=1, #permissions do
         local permission = permissions[i]
         ExecuteCommand(('add_ace PlusCore%s %s allow'):format(permission, permission))
@@ -92,7 +92,7 @@ PlusCoreCommands.Add('tp', Lang:t("command.tp.help"), { { name = Lang:t("command
             TriggerClientEvent('PlusCore:Notify', source, Lang:t('error.not_online'), 'error')
         end
     else
-            local location = Plus-Shared.Locations[args[1]]
+            local location = PlusShared.Locations[args[1]]
             if location then
                 TriggerClientEvent('PlusCore:Command:TeleportToCoords', source, location.x, location.y, location.z, location.w)
             else
@@ -120,8 +120,8 @@ PlusCoreCommands.Add('tpm', Lang:t("command.tpm.help"), {}, false, function(sour
 end, 'admin')
 
 PlusCoreCommands.Add('togglepvp', Lang:t("command.togglepvp.help"), {}, false, function()
-    Plus-Config.Server.PVP = not Plus-Config.Server.PVP
-    TriggerClientEvent('PlusCore:Client:PvpHasToggled', -1, Plus-Config.Server.PVP)
+    PlusConfig.Server.PVP = not PlusConfig.Server.PVP
+    TriggerClientEvent('PlusCore:Client:PvpHasToggled', -1, PlusConfig.Server.PVP)
 end, 'admin')
 
 -- Permissions

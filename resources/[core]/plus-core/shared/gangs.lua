@@ -1,5 +1,5 @@
-Plus-Shared = Plus-Shared or {}
-Plus-Shared.Gangs = {
+PlusShared = PlusShared or {}
+PlusShared.Gangs = {
 	['none'] = {
 		label = 'No Gang',
 		grades = {

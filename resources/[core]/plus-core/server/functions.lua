@@ -204,9 +204,9 @@ function PaycheckInterval()
     if next(PlusCore.Users) then
         for _, Player in pairs(PlusCore.Users) do
             if Player then
-                local payment = Plus-Shared.Jobs[Player.UserData.job.name]['grades'][tostring(Player.UserData.job.grade.level)].payment
+                local payment = PlusShared.Jobs[Player.UserData.job.name]['grades'][tostring(Player.UserData.job.grade.level)].payment
                 if not payment then payment = Player.UserData.job.payment end
-                if Player.UserData.job and payment > 0 and (Plus-Shared.Jobs[Player.UserData.job.name].offDutyPay or Player.UserData.job.onduty) then
+                if Player.UserData.job and payment > 0 and (PlusShared.Jobs[Player.UserData.job.name].offDutyPay or Player.UserData.job.onduty) then
                     if PlusCoreConfig.Money.PayCheckSociety then
                         local account = exports['qb-management']:GetAccount(Player.UserData.job.name)
                         if account ~= 0 then -- Checks if player is employed by a society

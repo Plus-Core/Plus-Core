@@ -1,7 +1,7 @@
 PlusCore = {}
 PlusCore.UserData = {}
-PlusCoreConfig = Plus-Config
-PlusCoreShared = Plus-Shared
+PlusCoreConfig = PlusConfig
+PlusCoreShared = PlusShared
 PlusCoreClientCallbacks = {}
 PlusCoreServerCallbacks = {}
 

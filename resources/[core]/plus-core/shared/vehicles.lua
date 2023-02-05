@@ -1,7 +1,7 @@
-Plus-Shared = Plus-Shared or {}
-Plus-Shared.VehicleHashes = {}
+PlusShared = PlusShared or {}
+PlusShared.VehicleHashes = {}
 
-Plus-Shared.Vehicles = {
+PlusShared.Vehicles = {
 	--- Compacts
 	['asbo'] = {
 		['name'] = 'Asbo',
@@ -4583,6 +4583,6 @@ Plus-Shared.Vehicles = {
     },
 }
 
-for _, v in pairs(Plus-Shared.Vehicles) do
-	Plus-Shared.VehicleHashes[v.hash] = v
+for _, v in pairs(PlusShared.Vehicles) do
+	PlusShared.VehicleHashes[v.hash] = v
 end

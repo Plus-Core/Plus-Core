@@ -1,5 +1,5 @@
-Plus-Shared = Plus-Shared or {}
-Plus-Shared.Weapons = {
+PlusShared = PlusShared or {}
+PlusShared.Weapons = {
 	-- // WEAPONS
 	-- Melee
 	[`weapon_unarmed`] 				 = {['name'] = 'weapon_unarmed', 		['label'] = 'Fists', 				['weapontype'] = 'Melee',	['ammotype'] = nil, ['damagereason'] = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'},

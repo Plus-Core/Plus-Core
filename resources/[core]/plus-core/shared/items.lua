@@ -1,5 +1,5 @@
-Plus-Shared = Plus-Shared or {}
-Plus-Shared.Items = {
+PlusShared = PlusShared or {}
+PlusShared.Items = {
 	-- WEAPONS
 	-- Melee
 	['weapon_unarmed'] 				 = {['name'] = 'weapon_unarmed', 		 	  	['label'] = 'Fists', 					['weight'] = 1000, 		['type'] = 'weapon',	['ammotype'] = nil, 					['image'] = 'placeholder.png', 			['unique'] = true, 		['useable'] = false, 	['description'] = 'Fisticuffs'},

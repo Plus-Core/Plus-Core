@@ -158,7 +158,7 @@ function PlusCore.User.CheckUserData(source, UserData)
     UserData.gang.grade.name = UserData.gang.grade.name or 'none'
     UserData.gang.grade.level = UserData.gang.grade.level or 0
     -- Other
-    UserData.position = UserData.position or Plus-Config.DefaultSpawn
+    UserData.position = UserData.position or PlusConfig.DefaultSpawn
     UserData.items = GetResourceState('qb-inventory') ~= 'missing' and exports['qb-inventory']:LoadInventory(UserData.source, UserData.citizenid) or {}
     return PlusCore.User.CreatePlayer(UserData, Offline)
 end

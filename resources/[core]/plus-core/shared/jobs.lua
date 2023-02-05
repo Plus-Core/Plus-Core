@@ -1,6 +1,6 @@
-Plus-Shared = Plus-Shared or {}
-Plus-Shared.ForceJobDefaultDutyAtLogin = true -- true: Force duty state to jobdefaultDuty | false: set duty state from database last saved
-Plus-Shared.Jobs = {
+PlusShared = PlusShared or {}
+PlusShared.ForceJobDefaultDutyAtLogin = true -- true: Force duty state to jobdefaultDuty | false: set duty state from database last saved
+PlusShared.Jobs = {
 	['unemployed'] = {
 		label = 'Civilian',
 		defaultDuty = true,

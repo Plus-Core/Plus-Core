@@ -1,4 +1,4 @@
-Plus-Shared = Plus-Shared or {}
+PlusShared = PlusShared or {}
 
 local StringCharset = {}
 local NumberCharset = {}
@@ -7,17 +7,17 @@ for i = 48, 57 do NumberCharset[#NumberCharset + 1] = string.char(i) end
 for i = 65, 90 do StringCharset[#StringCharset + 1] = string.char(i) end
 for i = 97, 122 do StringCharset[#StringCharset + 1] = string.char(i) end
 
-function Plus-Shared.RandomStr(length)
+function PlusShared.RandomStr(length)
     if length <= 0 then return '' end
-    return Plus-Shared.RandomStr(length - 1) .. StringCharset[math.random(1, #StringCharset)]
+    return PlusShared.RandomStr(length - 1) .. StringCharset[math.random(1, #StringCharset)]
 end
 
-function Plus-Shared.RandomInt(length)
+function PlusShared.RandomInt(length)
     if length <= 0 then return '' end
-    return Plus-Shared.RandomInt(length - 1) .. NumberCharset[math.random(1, #NumberCharset)]
+    return PlusShared.RandomInt(length - 1) .. NumberCharset[math.random(1, #NumberCharset)]
 end
 
-function Plus-Shared.SplitStr(str, delimiter)
+function PlusShared.SplitStr(str, delimiter)
     local result = {}
     local from = 1
     local delim_from, delim_to = string.find(str, delimiter, from)
@@ -30,39 +30,39 @@ function Plus-Shared.SplitStr(str, delimiter)
     return result
 end
 
-function Plus-Shared.Trim(value)
+function PlusShared.Trim(value)
     if not value then return nil end
     return (string.gsub(value, '^%s*(.-)%s*$', '%1'))
 end
 
-function Plus-Shared.FirstToUpper(value)
+function PlusShared.FirstToUpper(value)
     if not value then return nil end
     return (value:gsub("^%l", string.upper))
 end
 
-function Plus-Shared.Round(value, numDecimalPlaces)
+function PlusShared.Round(value, numDecimalPlaces)
     if not numDecimalPlaces then return math.floor(value + 0.5) end
     local power = 10 ^ numDecimalPlaces
     return math.floor((value * power) + 0.5) / (power)
 end
 
-function Plus-Shared.ChangeVehicleExtra(vehicle, extra, enable)
+function PlusShared.ChangeVehicleExtra(vehicle, extra, enable)
     if DoesExtraExist(vehicle, extra) then
         if enable then
             SetVehicleExtra(vehicle, extra, false)
             if not IsVehicleExtraTurnedOn(vehicle, extra) then
-                Plus-Shared.ChangeVehicleExtra(vehicle, extra, enable)
+                PlusShared.ChangeVehicleExtra(vehicle, extra, enable)
             end
         else
             SetVehicleExtra(vehicle, extra, true)
             if IsVehicleExtraTurnedOn(vehicle, extra) then
-                Plus-Shared.ChangeVehicleExtra(vehicle, extra, enable)
+                PlusShared.ChangeVehicleExtra(vehicle, extra, enable)
             end
         end
     end
 end
 
-function Plus-Shared.SetDefaultVehicleExtras(vehicle, config)
+function PlusShared.SetDefaultVehicleExtras(vehicle, config)
     -- Clear Extras
     for i = 1, 20 do
         if DoesExtraExist(vehicle, i) then
@@ -71,17 +71,17 @@ function Plus-Shared.SetDefaultVehicleExtras(vehicle, config)
     end
 
     for id, enabled in pairs(config) do
-        Plus-Shared.ChangeVehicleExtra(vehicle, tonumber(id), type(enabled) == 'boolean' and enabled or true)
+        PlusShared.ChangeVehicleExtra(vehicle, tonumber(id), type(enabled) == 'boolean' and enabled or true)
     end
 end
 
-Plus-Shared.StarterItems = {
+PlusShared.StarterItems = {
     ['phone'] = { amount = 1, item = 'phone' },
     ['id_card'] = { amount = 1, item = 'id_card' },
     ['driver_license'] = { amount = 1, item = 'driver_license' },
 }
 
-Plus-Shared.MaleNoGloves = {
+PlusShared.MaleNoGloves = {
     [0] = true,
     [1] = true,
     [2] = true,
@@ -119,7 +119,7 @@ Plus-Shared.MaleNoGloves = {
     [132] = true
 }
 
-Plus-Shared.FemaleNoGloves = {
+PlusShared.FemaleNoGloves = {
     [0] = true,
     [1] = true,
     [2] = true,
