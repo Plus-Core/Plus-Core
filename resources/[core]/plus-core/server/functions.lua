@@ -6,7 +6,7 @@ PlusCoreUsableItems = {}
 -- Getters
 -- Get your player first and then trigger a function on them
 -- ex: local player = PlusCore.func.GetPlayer(source)
--- ex: local example = player.Functions.functionname(parameter)
+-- ex: local example = player.func.functionname(parameter)
 
 function PlusCore.func.GetCoords(entity)
     local coords = GetEntityCoords(entity, false)
@@ -213,16 +213,16 @@ function PaycheckInterval()
                             if account < payment then -- Checks if company has enough money to pay society
                                 TriggerClientEvent('PlusCore:Notify', Player.UserData.source, Lang:t('error.company_too_poor'), 'error')
                             else
-                                Player.Functions.AddMoney('bank', payment)
+                                Player.func.AddMoney('bank', payment)
                                 exports['qb-management']:RemoveMoney(Player.UserData.job.name, payment)
                                 TriggerClientEvent('PlusCore:Notify', Player.UserData.source, Lang:t('info.received_paycheck', {value = payment}))
                             end
                         else
-                            Player.Functions.AddMoney('bank', payment)
+                            Player.func.AddMoney('bank', payment)
                             TriggerClientEvent('PlusCore:Notify', Player.UserData.source, Lang:t('info.received_paycheck', {value = payment}))
                         end
                     else
-                        Player.Functions.AddMoney('bank', payment)
+                        Player.func.AddMoney('bank', payment)
                         TriggerClientEvent('PlusCore:Notify', Player.UserData.source, Lang:t('info.received_paycheck', {value = payment}))
                     end
                 end
@@ -369,7 +369,7 @@ function PlusCore.func.ToggleOptin(source)
     if not license or not PlusCore.func.HasPermission(source, 'admin') then return end
     local Player = PlusCore.func.GetPlayer(source)
     Player.UserData.optin = not Player.UserData.optin
-    Player.Functions.SetUserData('optin', Player.UserData.optin)
+    Player.func.SetUserData('optin', Player.UserData.optin)
 end
 
 -- Check if player is banned

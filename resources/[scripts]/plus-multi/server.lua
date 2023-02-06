@@ -41,9 +41,9 @@ PlusCore.func.CreateCallback("plus-multi:dashboard",function (source,cb)
         onlinecount = onlinecount +1
 
         local xPlayer = PlusCore.func.GetPlayer(v)
-        if xPlayer.PlayerData.job.name == "police" and xPlayer.PlayerData.job.onduty then
+        if xPlayer.UserData.job.name == "police" and xPlayer.UserData.job.onduty then
             policecount = policecount +1
-        elseif xPlayer.PlayerData.job.name == "ambulance" and xPlayer.PlayerData.job.onduty then
+        elseif xPlayer.UserData.job.name == "ambulance" and xPlayer.UserData.job.onduty then
             emscount = emscount + 1
         end
     end
@@ -61,19 +61,19 @@ local function GiveStarterItems(source)
     for k, v in pairs(PlusCore.Shared.StarterItems) do
         local info = {}
         if v.item == "id_card" then
-            info.citizenid = Player.PlayerData.citizenid
-            info.firstname = Player.PlayerData.charinfo.firstname
-            info.lastname = Player.PlayerData.charinfo.lastname
-            info.birthdate = Player.PlayerData.charinfo.birthdate
-            info.gender = Player.PlayerData.charinfo.gender
-            info.nationality = Player.PlayerData.charinfo.nationality
+            info.citizenid = Player.UserData.citizenid
+            info.firstname = Player.UserData.charinfo.firstname
+            info.lastname = Player.UserData.charinfo.lastname
+            info.birthdate = Player.UserData.charinfo.birthdate
+            info.gender = Player.UserData.charinfo.gender
+            info.nationality = Player.UserData.charinfo.nationality
         elseif v.item == "driver_license" then
-            info.firstname = Player.PlayerData.charinfo.firstname
-            info.lastname = Player.PlayerData.charinfo.lastname
-            info.birthdate = Player.PlayerData.charinfo.birthdate
+            info.firstname = Player.UserData.charinfo.firstname
+            info.lastname = Player.UserData.charinfo.lastname
+            info.birthdate = Player.UserData.charinfo.birthdate
             info.type = "Class C Driver License"
         end
-        Player.Functions.AddItem(v.item, v.amount, false, info)
+        Player.func.AddItem(v.item, v.amount, false, info)
     end
 end
 

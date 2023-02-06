@@ -196,7 +196,7 @@ end, 'admin')
 PlusCore.Commands.Add('givemoney', Lang:t("command.givemoney.help"), { { name = Lang:t("command.givemoney.params.id.name"), help = Lang:t("command.givemoney.params.id.help") }, { name = Lang:t("command.givemoney.params.moneytype.name"), help = Lang:t("command.givemoney.params.moneytype.help") }, { name = Lang:t("command.givemoney.params.amount.name"), help = Lang:t("command.givemoney.params.amount.help") } }, true, function(source, args)
     local Player = PlusCore.func.GetPlayer(tonumber(args[1]))
     if Player then
-        Player.Functions.AddMoney(tostring(args[2]), tonumber(args[3]))
+        Player.func.AddMoney(tostring(args[2]), tonumber(args[3]))
     else
         TriggerClientEvent('PlusCore:Notify', source, Lang:t('error.not_online'), 'error')
     end
@@ -205,7 +205,7 @@ end, 'admin')
 PlusCore.Commands.Add('setmoney', Lang:t("command.setmoney.help"), { { name = Lang:t("command.setmoney.params.id.name"), help = Lang:t("command.setmoney.params.id.help") }, { name = Lang:t("command.setmoney.params.moneytype.name"), help = Lang:t("command.setmoney.params.moneytype.help") }, { name = Lang:t("command.setmoney.params.amount.name"), help = Lang:t("command.setmoney.params.amount.help") } }, true, function(source, args)
     local Player = PlusCore.func.GetPlayer(tonumber(args[1]))
     if Player then
-        Player.Functions.SetMoney(tostring(args[2]), tonumber(args[3]))
+        Player.func.SetMoney(tostring(args[2]), tonumber(args[3]))
     else
         TriggerClientEvent('PlusCore:Notify', source, Lang:t('error.not_online'), 'error')
     end
@@ -221,7 +221,7 @@ end, 'user')
 PlusCore.Commands.Add('setjob', Lang:t("command.setjob.help"), { { name = Lang:t("command.setjob.params.id.name"), help = Lang:t("command.setjob.params.id.help") }, { name = Lang:t("command.setjob.params.job.name"), help = Lang:t("command.setjob.params.job.help") }, { name = Lang:t("command.setjob.params.grade.name"), help = Lang:t("command.setjob.params.grade.help") } }, true, function(source, args)
     local Player = PlusCore.func.GetPlayer(tonumber(args[1]))
     if Player then
-        Player.Functions.SetJob(tostring(args[2]), tonumber(args[3]))
+        Player.func.SetJob(tostring(args[2]), tonumber(args[3]))
     else
         TriggerClientEvent('PlusCore:Notify', source, Lang:t('error.not_online'), 'error')
     end
@@ -237,7 +237,7 @@ end, 'user')
 PlusCore.Commands.Add('setgang', Lang:t("command.setgang.help"), { { name = Lang:t("command.setgang.params.id.name"), help = Lang:t("command.setgang.params.id.help") }, { name = Lang:t("command.setgang.params.gang.name"), help = Lang:t("command.setgang.params.gang.help") }, { name = Lang:t("command.setgang.params.grade.name"), help = Lang:t("command.setgang.params.grade.help") } }, true, function(source, args)
     local Player = PlusCore.func.GetPlayer(tonumber(args[1]))
     if Player then
-        Player.Functions.SetGang(tostring(args[2]), tonumber(args[3]))
+        Player.func.SetGang(tostring(args[2]), tonumber(args[3]))
     else
         TriggerClientEvent('PlusCore:Notify', source, Lang:t('error.not_online'), 'error')
     end

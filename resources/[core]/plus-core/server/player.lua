@@ -160,7 +160,7 @@ function PlusCore.User.CheckUserData(source, UserData)
     -- Other
     UserData.position = UserData.position or PlusConfig.DefaultSpawn
     UserData.items = GetResourceState('qb-inventory') ~= 'missing' and exports['qb-inventory']:LoadInventory(UserData.source, UserData.citizenid) or {}
-    return PlusCore.User.CreatePlayer(UserData, Offline)
+    return PlusCore.User.CreatePlayer(source,UserData, Offline)
 end
 
 -- On player logout
@@ -177,19 +177,20 @@ end
 -- Don't touch any of this unless you know what you are doing
 -- Will cause major issues!
 
-function PlusCore.User.CreatePlayer(UserData, Offline)
+function PlusCore.User.CreatePlayer(source,UserData, Offline)
     local self = {}
-    self.Functions = {}
+    self.func = {}
     self.UserData = UserData
     self.Offline = Offline
 
-    function self.Functions.UpdateUserData()
+    function self.func.UpdateUserData()
         if self.Offline then return end -- Unsupported for Offline Players
         TriggerEvent('PlusCore:Player:SetUserData', self.UserData)
         TriggerClientEvent('PlusCore:Player:SetUserData', self.UserData.source, self.UserData)
     end
 
-    function self.Functions.SetJob(job, grade)
+
+    function self.func.SetJob(job, grade)
         job = job:lower()
         grade = tostring(grade) or '0'
         if not PlusCore.Shared.Jobs[job] then return false end
@@ -213,7 +214,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         end
 
         if not self.Offline then
-            self.Functions.UpdateUserData()
+            self.func.UpdateUserData()
             TriggerEvent('PlusCore:Server:OnJobUpdate', self.UserData.source, self.UserData.job)
             TriggerClientEvent('PlusCore:Client:OnJobUpdate', self.UserData.source, self.UserData.job)
         end
@@ -221,7 +222,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         return true
     end
 
-    function self.Functions.SetGang(gang, grade)
+    function self.func.SetGang(gang, grade)
         gang = gang:lower()
         grade = tostring(grade) or '0'
         if not PlusCore.Shared.Gangs[gang] then return false end
@@ -241,7 +242,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         end
 
         if not self.Offline then
-            self.Functions.UpdateUserData()
+            self.func.UpdateUserData()
             TriggerEvent('PlusCore:Server:OnGangUpdate', self.UserData.source, self.UserData.gang)
             TriggerClientEvent('PlusCore:Client:OnGangUpdate', self.UserData.source, self.UserData.gang)
         end
@@ -249,39 +250,39 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         return true
     end
 
-    function self.Functions.SetJobDuty(onDuty)
+    function self.func.SetJobDuty(onDuty)
         self.UserData.job.onduty = not not onDuty -- Make sure the value is a boolean if nil is sent
-        self.Functions.UpdateUserData()
+        self.func.UpdateUserData()
     end
 
-    function self.Functions.SetUserData(key, val)
+    function self.func.SetUserData(key, val)
         if not key or type(key) ~= 'string' then return end
         self.UserData[key] = val
-        self.Functions.UpdateUserData()
+        self.func.UpdateUserData()
     end
 
-    function self.Functions.SetMetaData(meta, val)
+    function self.func.SetMetaData(meta, val)
         if not meta or type(meta) ~= 'string' then return end
         if meta == 'hunger' or meta == 'thirst' then
             val = val > 100 and 100 or val
         end
         self.UserData.metadata[meta] = val
-        self.Functions.UpdateUserData()
+        self.func.UpdateUserData()
     end
 
-    function self.Functions.GetMetaData(meta)
+    function self.func.GetMetaData(meta)
         if not meta or type(meta) ~= 'string' then return end
         return self.UserData.metadata[meta]
     end
 
-    function self.Functions.AddJobReputation(amount)
+    function self.func.AddJobReputation(amount)
         if not amount then return end
         amount = tonumber(amount)
         self.UserData.metadata['jobrep'][self.UserData.job.name] = self.UserData.metadata['jobrep'][self.UserData.job.name] + amount
-        self.Functions.UpdateUserData()
+        self.func.UpdateUserData()
     end
 
-    function self.Functions.AddMoney(moneytype, amount, reason)
+    function self.func.AddMoney(moneytype, amount, reason)
         reason = reason or 'unknown'
         moneytype = moneytype:lower()
         amount = tonumber(amount)
@@ -290,7 +291,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         self.UserData.money[moneytype] = self.UserData.money[moneytype] + amount
 
         if not self.Offline then
-            self.Functions.UpdateUserData()
+            self.func.UpdateUserData()
             if amount > 100000 then
                 TriggerEvent('qb-log:server:CreateLog', 'playermoney', 'AddMoney', 'lightgreen', '**' .. GetPlayerName(self.UserData.source) .. ' (citizenid: ' .. self.UserData.citizenid .. ' | id: ' .. self.UserData.source .. ')** $' .. amount .. ' (' .. moneytype .. ') added, new ' .. moneytype .. ' balance: ' .. self.UserData.money[moneytype] .. ' reason: ' .. reason, true)
             else
@@ -304,7 +305,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         return true
     end
 
-    function self.Functions.RemoveMoney(moneytype, amount, reason)
+    function self.func.RemoveMoney(moneytype, amount, reason)
         reason = reason or 'unknown'
         moneytype = moneytype:lower()
         amount = tonumber(amount)
@@ -320,7 +321,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         self.UserData.money[moneytype] = self.UserData.money[moneytype] - amount
 
         if not self.Offline then
-            self.Functions.UpdateUserData()
+            self.func.UpdateUserData()
             if amount > 100000 then
                 TriggerEvent('qb-log:server:CreateLog', 'playermoney', 'RemoveMoney', 'red', '**' .. GetPlayerName(self.UserData.source) .. ' (citizenid: ' .. self.UserData.citizenid .. ' | id: ' .. self.UserData.source .. ')** $' .. amount .. ' (' .. moneytype .. ') removed, new ' .. moneytype .. ' balance: ' .. self.UserData.money[moneytype] .. ' reason: ' .. reason, true)
             else
@@ -337,7 +338,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         return true
     end
 
-    function self.Functions.SetMoney(moneytype, amount, reason)
+    function self.func.SetMoney(moneytype, amount, reason)
         reason = reason or 'unknown'
         moneytype = moneytype:lower()
         amount = tonumber(amount)
@@ -347,7 +348,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         self.UserData.money[moneytype] = amount
 
         if not self.Offline then
-            self.Functions.UpdateUserData()
+            self.func.UpdateUserData()
             TriggerEvent('qb-log:server:CreateLog', 'playermoney', 'SetMoney', 'green', '**' .. GetPlayerName(self.UserData.source) .. ' (citizenid: ' .. self.UserData.citizenid .. ' | id: ' .. self.UserData.source .. ')** $' .. amount .. ' (' .. moneytype .. ') set, new ' .. moneytype .. ' balance: ' .. self.UserData.money[moneytype] .. ' reason: ' .. reason)
             TriggerClientEvent('hud:client:OnMoneyChange', self.UserData.source, moneytype, math.abs(difference), difference < 0)
             TriggerClientEvent('PlusCore:Client:OnMoneyChange', self.UserData.source, moneytype, amount, "set", reason)
@@ -357,18 +358,18 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         return true
     end
 
-    function self.Functions.GetMoney(moneytype)
+    function self.func.GetMoney(moneytype)
         if not moneytype then return false end
         moneytype = moneytype:lower()
         return self.UserData.money[moneytype]
     end
 
-    function self.Functions.SetCreditCard(cardNumber)
+    function self.func.SetCreditCard(cardNumber)
         self.UserData.charinfo.card = cardNumber
-        self.Functions.UpdateUserData()
+        self.func.UpdateUserData()
     end
 
-    function self.Functions.GetCardSlot(cardNumber, cardType)
+    function self.func.GetCardSlot(cardNumber, cardType)
         local item = tostring(cardType):lower()
         local slots = exports['qb-inventory']:GetSlotsByItem(self.UserData.items, item)
         for _, slot in pairs(slots) do
@@ -381,7 +382,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         return nil
     end
 
-    function self.Functions.Save()
+    function self.func.Save()
         if self.Offline then
             PlusCore.User.SaveOffline(self.UserData)
         else
@@ -389,16 +390,16 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
         end
     end
 
-    function self.Functions.Logout()
+    function self.func.Logout()
         if self.Offline then return end -- Unsupported for Offline Players
         PlusCore.User.Logout(self.UserData.source)
     end
 
-    function self.Functions.AddMethod(methodName, handler)
-        self.Functions[methodName] = handler
+    function self.func.AddMethod(methodName, handler)
+        self.func[methodName] = handler
     end
 
-    function self.Functions.AddField(fieldName, data)
+    function self.func.AddField(fieldName, data)
         self[fieldName] = data
     end
 
@@ -410,7 +411,7 @@ function PlusCore.User.CreatePlayer(UserData, Offline)
 
         -- At this point we are safe to emit new instance to third party resource for load handling
         TriggerEvent('PlusCore:Server:PlayerLoaded', self)
-        self.Functions.UpdateUserData()
+        self.func.UpdateUserData()
     end
 end
 
@@ -429,12 +430,12 @@ function PlusCore.func.AddPlayerMethod(ids, methodName, handler)
     if idType == "number" then
         if ids == -1 then
             for _, v in pairs(PlusCore.Users) do
-                v.Functions.AddMethod(methodName, handler)
+                v.func.AddMethod(methodName, handler)
             end
         else
             if not PlusCore.Users[ids] then return end
 
-            PlusCore.Users[ids].Functions.AddMethod(methodName, handler)
+            PlusCore.Users[ids].func.AddMethod(methodName, handler)
         end
     elseif idType == "table" and table.type(ids) == "array" then
         for i = 1, #ids do
@@ -456,12 +457,12 @@ function PlusCore.func.AddPlayerField(ids, fieldName, data)
     if idType == "number" then
         if ids == -1 then
             for _, v in pairs(PlusCore.Users) do
-                v.Functions.AddField(fieldName, data)
+                v.func.AddField(fieldName, data)
             end
         else
             if not PlusCore.Users[ids] then return end
 
-            PlusCore.Users[ids].Functions.AddField(fieldName, data)
+            PlusCore.Users[ids].func.AddField(fieldName, data)
         end
     elseif idType == "table" and table.type(ids) == "array" then
         for i = 1, #ids do

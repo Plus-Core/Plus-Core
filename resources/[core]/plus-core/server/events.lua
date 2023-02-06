@@ -12,7 +12,7 @@ AddEventHandler('playerDropped', function(reason)
     if not PlusCore.Users[src] then return end
     local Player = PlusCore.Users[src]
     TriggerEvent('qb-log:server:CreateLog', 'joinleave', 'Dropped', 'red', '**' .. GetPlayerName(src) .. '** (' .. Player.UserData.license .. ') left..' ..'\n **Reason:** ' .. reason)
-    Player.Functions.Save()
+    Player.func.Save()
     PlusCore.User_Buckets[Player.UserData.license] = nil
     PlusCore.Users[src] = nil
 end)
@@ -132,10 +132,10 @@ RegisterNetEvent('PlusCore:UpdatePlayer', function()
     if newThirst <= 0 then
         newThirst = 0
     end
-    Player.Functions.SetMetaData('thirst', newThirst)
-    Player.Functions.SetMetaData('hunger', newHunger)
+    Player.func.SetMetaData('thirst', newThirst)
+    Player.func.SetMetaData('hunger', newHunger)
     TriggerClientEvent('hud:client:UpdateNeeds', src, newHunger, newThirst)
-    Player.Functions.Save()
+    Player.func.Save()
 end)
 
 RegisterNetEvent('PlusCore:Server:SetMetaData', function(meta, data)
@@ -147,7 +147,7 @@ RegisterNetEvent('PlusCore:Server:SetMetaData', function(meta, data)
             data = 100
         end
     end
-    Player.Functions.SetMetaData(meta, data)
+    Player.func.SetMetaData(meta, data)
     TriggerClientEvent('hud:client:UpdateNeeds', src, Player.UserData.metadata['hunger'], Player.UserData.metadata['thirst'])
 end)
 
@@ -156,10 +156,10 @@ RegisterNetEvent('PlusCore:ToggleDuty', function()
     local Player = PlusCore.func.GetPlayer(src)
     if not Player then return end
     if Player.UserData.job.onduty then
-        Player.Functions.SetJobDuty(false)
+        Player.func.SetJobDuty(false)
         TriggerClientEvent('PlusCore:Notify', src, Lang:t('info.off_duty'))
     else
-        Player.Functions.SetJobDuty(true)
+        Player.func.SetJobDuty(true)
         TriggerClientEvent('PlusCore:Notify', src, Lang:t('info.on_duty'))
     end
     TriggerClientEvent('PlusCore:Client:SetDuty', src, Player.UserData.job.onduty)
