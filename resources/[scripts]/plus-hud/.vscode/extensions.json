@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "sumneko.lua",
+        "fivem-vscode.fivem-vscode",
+        "ihyajb.PlusCore-code-snippets",
+        "eamodio.gitlens",
+        "GitHub.vscode-pull-request-github"
+    ]
+}
